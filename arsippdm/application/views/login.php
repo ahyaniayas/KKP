@@ -42,7 +42,7 @@
                 <div class="col-lg-7 col-md-8 col-sm-9 col-12 mx-auto form-wrapper">
                   <form url="<?= base_url('login-aksi') ?>" onsubmit="submitData(this, event)">
                     <div class="form-group input-rounded">
-                      <input type="text" class="form-control text-center" name="no_induk" placeholder="Masukkan No Induk" required="" />
+                      <input type="text" class="form-control text-center" name="username" placeholder="Masukkan Username" required="" />
                     </div>
                     <div class="form-group input-rounded">
                       <input type="password" class="form-control text-center" name="password" placeholder="Masukkan Password" required="" />
@@ -85,9 +85,9 @@
         var URL = $(ini).attr("url");
 
         var formData = new FormData(ini);
-        for (var pair of formData.entries()) {
-            console.log(pair[0]+ ' = ' + pair[1]); 
-        }
+        // for (var pair of formData.entries()) {
+        //     console.log(pair[0]+ ' = ' + pair[1]); 
+        // }
         $.ajax({
           type:'POST',
           url: URL,

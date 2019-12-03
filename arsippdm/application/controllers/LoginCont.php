@@ -15,10 +15,10 @@ class LoginCont extends CI_Controller {
 
 	public function loginAksi(){
 		// header('Access-Control-Allow-Origin: *');
-		$no_induk = $this->input->post('no_induk');
+		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 		$data = array(
-			"no_induk" 	=> $no_induk,
+			"username" 	=> $username,
 			"password" 	=> md5(md5(md5($password)))
 		);
 		$hasil = $this->loginModel->get($data)->result();

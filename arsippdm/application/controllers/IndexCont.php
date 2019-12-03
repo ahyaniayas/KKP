@@ -7,14 +7,12 @@ class IndexCont extends CI_Controller {
 		parent::__construct();		
 		$this->load->model('indexModel');
 
-		if(empty($this->session->userdata('token'))){
+		if(empty($this->session->userdata('username'))){
 			redirect(base_url("login"));
 		}
 	}
 	
 	public function index(){
-		$id_pj = $this->session->id;
-		$data['jadwalH'] = $this->indexModel->getH($id_pj)->result();
-		$this->load->view('beranda', $data);
+		$this->load->view('beranda');
 	}
 }

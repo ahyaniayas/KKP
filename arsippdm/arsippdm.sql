@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Des 2019 pada 10.58
+-- Waktu pembuatan: 03 Des 2019 pada 08.50
 -- Versi server: 10.1.34-MariaDB
 -- Versi PHP: 7.2.7
 
@@ -71,6 +71,7 @@ CREATE TABLE `user` (
   `nama` varchar(25) DEFAULT NULL,
   `no_tlp` varchar(15) DEFAULT NULL,
   `alamat` varchar(50) DEFAULT NULL,
+  `username` varchar(15) NOT NULL,
   `password` varchar(32) DEFAULT NULL,
   `password_text` varchar(6) DEFAULT NULL,
   `created_by` varchar(25) DEFAULT NULL,
@@ -83,8 +84,8 @@ CREATE TABLE `user` (
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`user_id`, `no_induk`, `nama`, `no_tlp`, `alamat`, `password`, `password_text`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
-(1, '111', 'ahyani', '021', 'bekasi', 'c56d0e9a7ccec67b4ea131655038d604', '123456', 'system', '2019-12-02 14:21:20', NULL, NULL);
+INSERT INTO `user` (`user_id`, `no_induk`, `nama`, `no_tlp`, `alamat`, `username`, `password`, `password_text`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
+(1, '', 'admin pdm', '021', 'bekasi', 'admin', 'c56d0e9a7ccec67b4ea131655038d604', '123456', 'system', '2019-12-02 14:21:20', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -108,6 +109,7 @@ ALTER TABLE `surat`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `no_induk` (`no_induk`);
 
 --
