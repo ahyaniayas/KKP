@@ -59,7 +59,6 @@ $route['translate_uri_dashes'] = FALSE;
 // login
 $route['login'] = 'loginCont';
 $route['login-aksi'] = 'loginCont/loginAksi';
-$route['beranda'] = 'indexCont/firstIndex';
 
 // user
 $route['user'] = 'user/userCont/user';
@@ -98,3 +97,18 @@ $route['(:any)/lihat-jadwal-detail'] = 'jadwal/jadwalDetailCont/lihat/$1';
 $route['(:any)/terkumpul-jadwal-detail'] = 'jadwal/jadwalDetailCont/iuranTerkumpul/$1';
 $route['cetak/(:any)-(:any)'] = 'report/reportCont/jadwal/$1';
 // end detail jadwal
+
+// arsip
+$route['arsip'] = 'arsip/arsipCont/arsip';
+$route['tbl-arsip'] = 'arsip/arsipCont/tbl';
+$route['tambah-arsip'] = 'arsip/arsipCont/tambah';
+$route['tambah-arsip-aksi'] = 'arsip/arsipCont/tambahAksi';
+$route['(:any)/edit-arsip'] = 'arsip/arsipCont/edit/$1';
+$route['(:any)/lihat-arsip'] = 'arsip/arsipCont/lihat/$1';
+$route['edit-arsip-aksi'] = 'arsip/arsipCont/editAksi';
+$route['(:any)/hapus-arsip'] = 'arsip/arsipCont/hapus/$1';
+$route['hapus-arsip-aksi'] = 'arsip/arsipCont/hapusAksi';
+
+$route['arsip/(:any)'] = 'arsip/arsipCont/surat/$1';
+$route['(:any)/tbl-surat'] = 'arsip/arsipCont/tblSurat/$1';
+$route['(:any)/tambah-surat'] = 'arsip/arsipCont/tambahSurat/$1';

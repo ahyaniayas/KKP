@@ -1,5 +1,5 @@
 <?php
-  $judul = $this->uri->segment(1);
+  $segment1 = $this->uri->segment(1);
   $iduserlogin = $this->session->userdata('user_id');
   $username = $this->session->username;
 ?>
@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Aplikasi Acara</title>
+    <title>E-Arsip Surat</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="<?= base_url('assets/vendors/iconfonts/mdi/css/materialdesignicons.css') ?>">
     <!-- endinject -->
@@ -20,19 +20,29 @@
     <!-- Layout style -->
     <link rel="stylesheet" href="<?= base_url('assets/css/demo_1/style.css') ?>">
     <!-- Layout style -->
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/custom.css') ?>">
+    <!-- end Custom CSS -->
     <!-- bootstrap datatables -->
     <link rel="stylesheet" href="<?= base_url('assets/vendors/bootstrap/css/dataTables.bootstrap4.min.css') ?>">
     <!-- end bootstrap datatables -->
     <!-- icon title -->
-    <link rel="shortcut icon" href="<?= base_url('assets/images/label-acara.gif') ?>" />
+    <link rel="shortcut icon" href="<?= base_url('assets/images/label-kecil.gif') ?>" />
     <!-- end icon title -->
     <!-- gijgo -->
     <link rel="stylesheet" href="<?= base_url('assets/vendors/gijgo/dist/combined/css/gijgo.min.css') ?>"/>
     <!-- end gijgo -->
+    <!-- Bootstrap Material Datetimepicker -->
+    <link rel="stylesheet" href="<?= base_url('assets/vendors/material-datetimepicker/css/bootstrap-material-datetimepicker.css') ?>"/>
+    <link rel="stylesheet" href="<?= base_url('assets/vendors/material-datetimepicker/css/custom.css') ?>"/>
+    <!-- end Bootstrap Material Datetimepicker -->
   </head>
   <body class="header-fixed">
     <?php $this->load->view('_part/loading'); ?>
     <!-- partial:partials/_header.html -->
+    <!-- Alert Popup -->
+    <div class="alertPopup" style="display:none">Alert</div>
+    <!-- end Alert Popup -->
     <nav class="t-header">
       <div class="t-header-brand-wrapper">
         <a href="<?= base_url() ?>">
@@ -65,30 +75,20 @@
       <div class="sidebar">
         <ul class="navigation-menu">
           <li class="nav-category-divider">MENU</li>
-          <li class="<?= empty($judul)? 'active': ''; ?>">
+          <li class="<?= empty($segment1)? 'active': ''; ?>">
             <a href="<?= base_url() ?>">
               <span class="link-title">Dashboard</span>
               <i class="mdi mdi-gauge link-icon"></i>
             </a>
           </li>
-          <li>
-            <a href="#navigation1" data-toggle="collapse" aria-expanded="false">
-              <span class="link-title">Manajemen Data</span>
-              <i class="mdi mdi-database link-icon"></i>
+
+          <li class="<?= ($segment1=='arsip')? 'active': ''; ?>">
+            <a href="<?= base_url('arsip') ?>">
+              <span class="link-title">Arsip</span>
+              <i class="mdi mdi-file-document link-icon"></i>
             </a>
-            <ul class="collapse navigation-submenu" id="navigation1">
-              <li>
-                <a href="<?= base_url('user') ?>">Pengguna</a>
-              </li>
-              <li>
-                <?php if(empty($token)){ ?>
-                <a href="#jadwal">Jadwal</a>
-                <?php }else{ ?>
-                <a href="<?= base_url('jadwal') ?>">Jadwal</a>
-                <?php } ?>
-              </li>
-            </ul>
           </li>
+          
           <li>
             <a href="<?= base_url('login') ?>">
               <span class="link-title">Keluar</span>
@@ -136,3 +136,13 @@
 <!-- numeral -->
 <script src="<?= base_url('assets/vendors/numeral/numeral.js') ?>"></script>
 <!-- end numeral -->
+<!-- inputmask -->
+<script src="<?= base_url('assets/vendors/Inputmask/dist/jquery.inputmask.js') ?>"></script>
+<!-- end inputmask -->
+<!-- jquery-mask -->
+<script src="<?= base_url('assets/vendors/jquery-mask/src/jquery.mask.js') ?>"></script>
+<!-- end jquery-mask -->
+<!-- Bootstrap Material Datetimepicker -->
+<script src="<?= base_url('assets/vendors/material-datetimepicker/momentjs/moment.js') ?>"></script>
+<script src="<?= base_url('assets/vendors/material-datetimepicker/js/bootstrap-material-datetimepicker.js') ?>"></script>
+<!-- end Bootstrap Material Datetimepicker -->

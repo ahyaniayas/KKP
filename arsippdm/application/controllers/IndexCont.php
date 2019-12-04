@@ -7,12 +7,13 @@ class IndexCont extends CI_Controller {
 		parent::__construct();		
 		$this->load->model('indexModel');
 
-		if(empty($this->session->userdata('username'))){
+		if(empty($this->session->username)){
 			redirect(base_url("login"));
 		}
 	}
 	
 	public function index(){
-		$this->load->view('beranda');
+		$data['arsip'] = $this->indexModel->getArsipLimit("4")->result();
+		$this->load->view('beranda', $data);
 	}
 }

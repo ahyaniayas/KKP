@@ -16,7 +16,7 @@
     <!-- Layout style -->
     <link rel="stylesheet" href="<?= base_url('assets/css/demo_1/style.css') ?>">
     <!-- Layout style -->
-    <link rel="shortcut icon" href="<?= base_url('assets/images/label.gif') ?>" />
+    <link rel="shortcut icon" href="<?= base_url('assets/images/label-kecil.gif') ?>" />
   </head>
   <body>
     <?php $this->load->view('_part/loading'); ?>

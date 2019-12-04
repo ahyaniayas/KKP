@@ -24,9 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://172.16.19.18/acara'; // pc kantor
-// $config['base_url'] = 'http://192.168.43.207/proj/acara'; // wifi dari hp
+$config['base_url'] = 'http://192.168.43.207/github/KKP/arsippdm'; // wifi dari hp
 // $config['base_url'] = 'http://172.16.18.208/proj/acara'; // ip btn
-$config['base_url'] = 'http://172.16.15.16/github/KKP/arsippdm'; // wifi kantor
+// $config['base_url'] = 'http://172.16.15.16/github/KKP/arsippdm'; // wifi kantor
 
 /*
 |--------------------------------------------------------------------------

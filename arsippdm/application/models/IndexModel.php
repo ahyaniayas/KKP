@@ -2,12 +2,11 @@
 
 class IndexModel extends CI_Model{
 
-	function getH($id_pj){
-		$this->db->select('jh.deskripsi, jh.iuran, jh.link, (SELECT count(id) FROM jadwal_d WHERE id_jadwal=jh.id) jml_nama');
-		$this->db->from('jadwal_h jh');
-		$this->db->where("id_pj", $id_pj);
-		$this->db->where("status", "1");
-		$this->db->order_by("jh.tanggal", "DESC");
+	function getArsipLimit($limit){
+		$hasil = $this->db->select('a.*, (SELECT count(b.arsip_id) FROM surat b WHERE b.arsip_id=a.arsip_id) jml_surat');
+		$hasil = $this->db->from('arsip a');
+		$hasil = $this->db->limit($limit);
+		$hasil = $this->db->order_by('created_on', 'desc');
 		$hasil = $this->db->get();
 		return $hasil;
 	}

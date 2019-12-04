@@ -118,6 +118,16 @@ function alert(msg, bgcolor){
 }
 // end fungsi alert
 
+// fungsi alertPopup
+function alertPopup(msg){
+  $(".alertPopup").fadeIn(400).delay(1500).fadeOut(400);
+  $(".alertPopup").html(msg);
+}
+$(document).ready(function(){
+  // alertPopup("test");
+})
+// end fungsi alertPopup
+
 // mandatory
 function mandatory(){
   $(".mandatory").append("<i style='color: red; font-style: normal;'> *</i>");
@@ -208,3 +218,74 @@ function copyText(elementId) {
 
 }
 // End Copy to clipboard
+
+// add Disabled
+function addDisabled(tipe, target){
+  if(tipe=="1"){
+    $(target).removeAttr("disabled");
+  }else if(tipe=="0")
+    $(target).attr("disabled", "");
+}
+// end add Disabled
+
+// inputmask datetime
+function inputDateTime(){
+  // Initialize InputMask
+  $(".dateMY").inputmask({
+    alias: "datetime",
+    inputFormat: "mm-yyyy",
+    placeholder: "mm-yyyy",
+    imInsert: "false"
+  });
+
+  $(".datetime").inputmask({
+    alias: "datetime",
+    inputFormat: "dd-mm-yyyy HH:MM",
+    placeholder: "dd-mm-yyyy hh:mm",
+    imInsert: "false"
+  });
+}
+
+$(document).ready(function(){
+  inputDateTime();
+})
+// end inputmask datetime
+
+// Bootstrap Material datetime
+function dateTimePicker(){
+  $(".datepicker").bootstrapMaterialDatePicker({
+    format: 'DD-MM-YYYY',
+    clearButton: false,
+    weekStart: 1,
+    time: false,
+    // minDate: '12-09-2019 12:00'
+  });
+  $(".datetimepicker").bootstrapMaterialDatePicker({
+    format: 'DD-MM-YYYY HH:mm',
+    clearButton: false,
+    weekStart: 1,
+    time: true,
+    // minDate: '12-09-2019 12:00'
+  });
+  $(".datepickerMY").bootstrapMaterialDatePicker({
+    format: 'MM-YYYY',
+    clearButton: false,
+    weekStart: 1,
+    time: false,
+    // minDate: '12-09-2019 12:00'
+  });
+}
+
+$(document).ready(function(){
+  dateTimePicker();
+})
+// End Bootstrap Material datetime
+
+// text to nomor surat format
+function noSuratFormat(){
+  $('.nosurat').mask('00-AA-00', {reverse: false});
+}
+$(document).ready(function(){
+  noSuratFormat();
+})
+// end text to nomor surat format
