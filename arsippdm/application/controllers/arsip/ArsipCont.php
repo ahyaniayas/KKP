@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class ArsipCont extends CI_Controller {
 	
 	function __construct(){
-		parent::__construct();		
+		parent::__construct();
+		$this->load->helper(array('url','download'));
 		$this->load->model('arsip/arsipModel');
 
 		if(empty($this->session->username)){
@@ -108,6 +109,136 @@ class ArsipCont extends CI_Controller {
 		$id = base64_decode($id);
 		$data["idH"] = $id;
 		$this->load->view('arsip/ajax/surat/tambah', $data);
+	}
+
+	function tambahSuratAksi(){
+		$arsip_id = $this->input->post("arsip_id");
+		$nomor = $this->input->post("nomor");
+		$tglsurat = $this->input->post("tglsurat");
+		$perihal = $this->input->post("perihal");
+		$jenissurat = $this->input->post("jenissurat");
+		$tujuandari = $this->input->post("tujuandari");
+
+		$file_name = $_FILES["file"]['name'];
+		$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
+		$file = $nomor.".".$file_ext;
+
+		$oleh = $this->session->username;
+		$pada = date("Y-m-d H:i:s");
+
+		$data = array(
+			"arsip_id" => $arsip_id,
+			"nomor" => $nomor,
+			"tglsurat" => date("Y-m-d", strtotime($tglsurat)),
+			"perihal" => $perihal,
+			"jenissurat" => $jenissurat,
+			"tujuandari" => $tujuandari,
+			"file" => $file,
+
+			"created_by" 	=> $oleh,
+			"created_on" 	=> $pada
+		);
+		
+		$this->arsipModel->insSurat($data);
+		$this->aksi_upload($file);
+
+		echo json_encode(array("Tambah Berhasil", "tambah"));
+	}
+
+	function editSurat($id){
+		$id = base64_decode($id);
+		$where = "surat_id='$id'";
+		$data['surat'] = $this->arsipModel->getSuratWhere($where)->result();
+		$this->load->view('arsip/ajax/surat/edit',$data);
+	}
+
+	function lihatSurat($id){
+		$id = base64_decode($id);
+		$where = "surat_id='$id'";
+		$data['surat'] = $this->arsipModel->getSuratWhere($where)->result();
+		$data['parameter'] = "lihat";
+		$this->load->view('arsip/ajax/surat/edit',$data);
+	}
+
+	function editSuratAksi(){
+		$id = $this->input->post("surat_id");
+		$nomor = $this->input->post("nomor");
+		$tglsurat = $this->input->post("tglsurat");
+		$perihal = $this->input->post("perihal");
+		$jenissurat = $this->input->post("jenissurat");
+		$tujuandari = $this->input->post("tujuandari");
+		$file_lama = $this->input->post("file_lama");
+
+		$file_name = $_FILES["file"]['name'];
+
+		if(empty($file_name)){
+			$file = $file_lama;
+		}else{
+			unlink("./upload/".$file_lama);
+			$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
+			$file = $nomor.".".$file_ext;
+		}
+		// echo $file;
+
+		$oleh = $this->session->username;
+		$pada = date("Y-m-d H:i:s");
+
+		$data = array(
+			"tglsurat" => date("Y-m-d", strtotime($tglsurat)),
+			"perihal" => $perihal,
+			"jenissurat" => $jenissurat,
+			"tujuandari" => $tujuandari,
+			"file" => $file,
+
+			"updated_by" 	=> $oleh,
+			"updated_on" 	=> $pada
+		);
+		
+		$this->arsipModel->updSurat($data, $id);
+		$this->aksi_upload($file);
+
+		echo json_encode(array("Edit Berhasil", ""));
+	}
+
+	function hapusSurat($id){
+		$id = base64_decode($id);
+		$where = "surat_id='$id'";
+		$data['surat'] = $this->arsipModel->getSuratWhere($where)->result();
+		$this->load->view('arsip/ajax/surat/hapus',$data);
+	}
+
+	function hapusSuratAksi(){
+		$id = $this->input->post("surat_id");
+		$file = $this->input->post("file");
+		$this->arsipModel->delSurat($id);
+		unlink("./upload/".$file);
+		echo json_encode(array("Hapus Berhasil", ""));
+	}
+
+	function aksi_upload($file_name){
+		$config['upload_path'] = './upload/';
+		$config['allowed_types'] = '*';
+		$config['max_size'] = 0;
+		$config['file_name'] = $file_name;
+		// $config['encrypt_name'] = TRUE;
+		// $config['overwrite'] = FALSE;
+		// $config['max_width'] = 1024;
+		// $config['max_height'] = 768;
+ 
+		$this->load->library('upload', $config);
+ 
+		if ( ! $this->upload->do_upload('file')){
+			$error = array('error' => $this->upload->display_errors());
+			// print_r($error);
+		}else{
+			$data = array('upload_data' => $this->upload->data());
+			// print_r($data);
+		}
+	}
+ 
+	function downloadSurat($file){
+		$file = base64_decode($file);			
+		force_download('upload/'.$file, NULL);
 	}
 
 }

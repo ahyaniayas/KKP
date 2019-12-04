@@ -1,7 +1,7 @@
 <?php
 	$idH = $idH;
 ?>
-<form url="<?= base_url('tambah-arsip-aksi') ?>" onsubmit="submitData(this, event)">
+<form url="<?= base_url('tambah-surat-aksi') ?>" onsubmit="submitData(this, event)">
 	<div class="modal-header">
 		<h6 class="modal-title">Tambah Data</h6>
 		<button type="button" class="close" data-dismiss="modal" title="Batal">&times;</button>
@@ -48,7 +48,7 @@
 				<label for="tujuandari" class="mandatory">Tujuan/Dari</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<input type="text" class="form-control upper" name="tujuandari" id="tujuandari" maxlength="50" placeholder="Masukkan Perihal" required="">
+				<input type="text" class="form-control upper" name="tujuandari" id="tujuandari" maxlength="50" placeholder="Masukkan Tujuan/Dari" required="">
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">

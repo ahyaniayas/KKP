@@ -4,10 +4,14 @@
 		<tr>
 			<td><strong>Nama Arsip</strong></td>
 			<td><strong>Keterangan</strong></td>
+			<td style="width: 12%;"><strong>Total Surat</strong></td>
+			<td style="width: 15%;"><strong>Dibuat Pada</strong></td>
 		</tr>
 		<tr>
 			<th>Nama Arsip</th>
 			<th>Keterangan</th>
+			<th>Total Surat</th>
+			<th>Dibuat Pada</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -18,6 +22,8 @@
 
 			$nama_arsip = $isi->nama_arsip;
 			$keterangan = $isi->keterangan;
+			$jml_surat = $isi->jml_surat;
+			$created_on = $isi->created_on;
 
 			$urlEdit = base_url($idBase64."/edit-arsip");
 			$urlLihat = base_url($idBase64."/lihat-arsip");
@@ -39,7 +45,7 @@
 					<button class='btn btn-xs btn-danger' type='button' title='Hapus Data' onclick='getForm(&quot;<?= $urlHapus ?>&quot;)'>
 						<i class='mdi mdi-delete-variant'></i>
 					</button>
-					<a href='<?= $urlDetail ?>' class='btn btn-xs btn-success' title='Lihat Detail'>
+					<a href='<?= $urlDetail ?>' class='btn btn-xs btn-dark' title='Lihat Detail'>
 						<i class='mdi mdi-arrow-top-right'></i>
 					</a>
 				</div>
@@ -49,11 +55,16 @@
 				<?= $nama_arsip ?>		
 			</td>
 			<td><?= $keterangan ?></td>
+			<td><?= number_format($jml_surat) ?> Surat</td>
+			<td>
+				<span class="d-none"><?= date("Ymd", strtotime($created_on)) ?></span>
+				<?= date("d-m-Y", strtotime($created_on)) ?>	
+			</td>
 		</tr>
 		<?php } ?>
 	</tbody>
 </table>
 <script>
     // datatables("#idtable", "order-valueOrder", "target-orderable");
-    datatablesSearch("#example", "0-asc", "", );
+    datatablesSearch("#example", "3-desc", "", );
 </script>

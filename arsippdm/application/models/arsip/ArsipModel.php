@@ -3,7 +3,9 @@
 class ArsipModel extends CI_Model{
 
 	function getAll(){
-		$hasil = $this->db->get('arsip');
+		$hasil = $this->db->select('a.*, (SELECT count(b.arsip_id) FROM surat b WHERE b.arsip_id=a.arsip_id) jml_surat');
+		$hasil = $this->db->from('arsip a');
+		$hasil = $this->db->get();
 		return $hasil;
 	}
 
@@ -32,6 +34,21 @@ class ArsipModel extends CI_Model{
 		$hasil = $this->db->where($where);
 		$hasil = $this->db->get('surat');
 		return $hasil;
+	}
+
+	function insSurat($data){
+		$this->db->insert("surat", $data);
+	}
+
+	function updSurat($data, $id){
+		$this->db->where("surat_id", $id);
+		$this->db->update("surat", $data);
+		// echo $this->db->last_query();
+	}
+
+	function delSurat($id){
+		$this->db->where("surat_id", $id);
+		$this->db->delete("surat");
 	}
 
 }

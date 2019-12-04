@@ -30,10 +30,11 @@
 			$jenissurat = $isi->jenissurat;
 			$tujuandari = $isi->tujuandari;
 			$file = $isi->file;
+			$fileBase64 = str_replace('=', '', base64_encode($file));
 
-			$urlEdit = base_url($idBase64."/edit-arsip");
-			$urlLihat = base_url($idBase64."/lihat-arsip");
-			$urlHapus = base_url($idBase64."/hapus-arsip");
+			$urlEdit = base_url($idBase64."/edit-surat");
+			$urlLihat = base_url($idBase64."/lihat-surat");
+			$urlHapus = base_url($idBase64."/hapus-surat");
 		?>
 		<tr id="<?= $id ?>" ondblclick="trpopup(this.id)">
 			<td>
@@ -62,7 +63,9 @@
 			<td><?= $perihal ?></td>
 			<td><?= $jenissurat ?></td>
 			<td><?= $tujuandari ?></td>
-			<td><?= $file ?></td>
+			<td>
+				<a href="<?= base_url($fileBase64.'/downsurat') ?>" title="Download Surat"><?= $file ?></a>
+			</td>
 		</tr>
 		<?php } ?>
 	</tbody>
