@@ -63,7 +63,7 @@
         </div>
       </div>
       <div class="auth_footer">
-        <p class="text-muted text-center">© ahyaniayas.com - Acara 2019</p>
+        <p class="text-muted text-center">© ahyaniayas.com - KKP 2019</p>
       </div>
     </div>
     <!--page body ends -->
