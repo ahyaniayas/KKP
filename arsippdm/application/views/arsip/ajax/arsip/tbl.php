@@ -57,7 +57,7 @@
 			<td><?= $keterangan ?></td>
 			<td><?= number_format($jml_surat) ?> Surat</td>
 			<td>
-				<span class="d-none"><?= date("Ymd", strtotime($created_on)) ?></span>
+				<span class="d-none"><?= strtotime($created_on) ?></span>
 				<?= date("d-m-Y", strtotime($created_on)) ?>	
 			</td>
 		</tr>

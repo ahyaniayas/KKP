@@ -57,7 +57,7 @@
 				<?= $nomor ?>		
 			</td>
 			<td>
-				<span class="d-none"><?= date("Ymd", strtotime($tglsurat)) ?></span>
+				<span class="d-none"><?= strtotime($tglsurat) ?></span>
 				<?= date("d-m-Y", strtotime($tglsurat)) ?>	
 			</td>
 			<td><?= $perihal ?></td>
