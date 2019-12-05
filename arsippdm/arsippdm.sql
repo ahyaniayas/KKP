@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Des 2019 pada 00.23
+-- Waktu pembuatan: 05 Des 2019 pada 02.21
 -- Versi server: 10.1.34-MariaDB
 -- Versi PHP: 7.2.7
 
@@ -44,7 +44,10 @@ CREATE TABLE `arsip` (
 
 INSERT INTO `arsip` (`arsip_id`, `nama_arsip`, `keterangan`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
 (1, 'KKP STMIK MJ BEKASI', 'KKP STMIK MJ BEKASI KETERANGAN', 'system', '2019-12-03 17:28:01', 'admin', '2019-12-04 16:11:12'),
-(9, 'RENCANA PEMBANGUNAN', 'RENCANA PEMBANGUNAN GEDUNG BARU BERLANTAI 6 DI CABANG', 'admin', '2019-12-04 23:54:41', NULL, NULL);
+(9, 'RENCANA PEMBANGUNAN', 'RENCANA PEMBANGUNAN GEDUNG BARU BERLANTAI 6 DI CABANG', 'admin', '2019-12-04 23:54:41', NULL, NULL),
+(10, 'PEROMBAKAN STRUKTUR', 'PERUBAHAN STRUKTUR KEPENGURUSAN PDM BEKASI TAHUN 2020', 'admin', '2019-12-05 00:30:59', NULL, NULL),
+(11, 'RECRUITMENT', 'RECRUITMENT PEGAWAI DI AUM PDM BEKASI ', 'admin', '2019-12-05 00:31:27', NULL, NULL),
+(12, 'SELEKSI KEPSEK', 'SELEKSI KEPALA SEKOLAH SMP 28 BEKASI', 'admin', '2019-12-05 00:32:03', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -74,7 +77,8 @@ CREATE TABLE `surat` (
 INSERT INTO `surat` (`surat_id`, `arsip_id`, `nomor`, `tglsurat`, `perihal`, `jenissurat`, `tujuandari`, `file`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
 (1, 1, '01/V/22', '2019-12-04', 'PENGAJUAN KKP STMIK MJ', 'MASUK', 'STMIK MJ', '01-V2-2.pdf', 'system', '2019-12-04 21:00:07', 'admin', '2019-12-04 23:32:57'),
 (2, 1, '02/V/22', '2018-12-05', 'PENERIMAAN KKP STMIK MJ', 'MASUK', 'STMIK MJ', '02-V2-2.pdf', 'system', '2019-12-04 21:01:08', 'admin', '2019-12-04 23:38:54'),
-(5, 9, '01-VV-19', '2019-12-05', 'PENGAJUAN KEPADA PP MUHAMMADIYAH', 'KELUAR', 'SEKRETARIAT PP MUHAMMADIYAH', '01-VV-19.xlsx', 'admin', '2019-12-05 00:05:30', 'admin', '2019-12-05 00:20:01');
+(5, 9, '01-VV-19', '2019-12-05', 'PENGAJUAN KEPADA PP MUHAMMADIYAH', 'KELUAR', 'SEKRETARIAT PP MUHAMMADIYAH', '01-VV-19.xlsx', 'admin', '2019-12-05 00:05:30', 'admin', '2019-12-05 00:20:01'),
+(6, 10, '01-ST-19', '2019-12-05', 'SURAT UNDANGAN PERNIKAHAN', 'KELUAR', 'ORANG ORANG', '01-ST-19.pdf', 'admin', '2019-12-05 08:17:13', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -139,13 +143,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `arsip`
 --
 ALTER TABLE `arsip`
-  MODIFY `arsip_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `arsip_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `surat`
 --
 ALTER TABLE `surat`
-  MODIFY `surat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `surat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`

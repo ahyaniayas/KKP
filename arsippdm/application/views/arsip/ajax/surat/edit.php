@@ -69,6 +69,7 @@
 			</div>
 			<div class="col-md-9 showcase_content_area">
 				<input type="file" name="file" id="fileE">
+				<p class="text-danger">* Sementara upload file maksimal 120kb</p>
 			</div>
 		</div>
 	</div>

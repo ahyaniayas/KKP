@@ -289,3 +289,23 @@ $(document).ready(function(){
   noSuratFormat();
 })
 // end text to nomor surat format
+
+// jam
+function jam(url, target){
+  setInterval(function(){
+
+    var date = new Date();
+
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+
+    var jamsekarang = hours + ":" + minutes + ":" + seconds;
+
+    $(target).html(jamsekarang);
+  }, 1000);
+}
+// END jam

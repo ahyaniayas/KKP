@@ -12,8 +12,9 @@ class IndexCont extends CI_Controller {
 		}
 	}
 	
-	public function index(){
+	function index(){
 		$data['arsip'] = $this->indexModel->getArsipLimit("4")->result();
 		$this->load->view('beranda', $data);
 	}
+
 }

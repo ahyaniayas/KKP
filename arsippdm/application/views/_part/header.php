@@ -62,8 +62,11 @@
             </div>
           </form> -->
           <ul class="nav ml-auto">
-            <li>
+            <li style="margin: 0 5px;">
               <?= strtoupper($username) ?>
+            </li>
+            <li style="margin: 0 5px;">
+              <strong id="jam">00:00:00</strong>
             </li>
           </ul>
         </div>
@@ -146,3 +149,9 @@
 <script src="<?= base_url('assets/vendors/material-datetimepicker/momentjs/moment.js') ?>"></script>
 <script src="<?= base_url('assets/vendors/material-datetimepicker/js/bootstrap-material-datetimepicker.js') ?>"></script>
 <!-- end Bootstrap Material Datetimepicker -->
+
+<!-- Custom -->
+<script>
+  jam("<?= base_url('jam') ?>", "#jam");
+</script>
+<!-- Custom -->

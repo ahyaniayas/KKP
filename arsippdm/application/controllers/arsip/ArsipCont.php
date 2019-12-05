@@ -218,7 +218,8 @@ class ArsipCont extends CI_Controller {
 	function aksi_upload($file_name){
 		$config['upload_path'] = './upload/';
 		$config['allowed_types'] = '*';
-		$config['max_size'] = 0;
+		// $config['max_size'] = 0; // unlimited
+		$config['max_size'] = 128; // limited
 		$config['file_name'] = $file_name;
 		// $config['encrypt_name'] = TRUE;
 		// $config['overwrite'] = FALSE;

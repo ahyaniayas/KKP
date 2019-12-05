@@ -16,9 +16,13 @@
     <!-- Layout style -->
     <link rel="stylesheet" href="<?= base_url('assets/css/demo_1/style.css') ?>">
     <!-- Layout style -->
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/custom.css') ?>">
+    <!-- Custom CSS -->
     <link rel="shortcut icon" href="<?= base_url('assets/images/label-kecil.gif') ?>" />
   </head>
   <body>
+    <img class="bg-image" src="<?= base_url('assets/images/bg-muhammadiyah.jpeg') ?>"/>
     <?php $this->load->view('_part/loading'); ?>
     <div class="authentication-theme auth-style_1">
       <div class="row">
