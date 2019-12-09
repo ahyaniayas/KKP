@@ -9,10 +9,22 @@
 	<div class="modal-body">
 		<div class="form-group row showcase_row_area">
 			<div class="col-md-3 showcase_text_area">
+				<label for="jenissurat" class="mandatory">Jenis Surat</label>
+			</div>
+			<div class="col-md-9 showcase_content_area">
+				<select class="form-control" name="jenissurat" id="jenissurat" required="">
+					<option value="">--- Pilih Jenis Surat ---</option>
+					<option>MASUK</option>
+					<option>KELUAR</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row showcase_row_area">
+			<div class="col-md-3 showcase_text_area">
 				<label for="nomor" class="mandatory">Nomor Surat</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<input type="text" class="form-control upper nosurat" name="nomor" id="nomor" maxlength="" placeholder="99-ZZ-99" required="">
+				<input type="text" class="form-control" name="nomor" id="nomor" maxlength="50" placeholder="Masukkan No Surat" required="">
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
@@ -28,19 +40,15 @@
 				<label for="perihal" class="mandatory">Perihal</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<textarea class="form-control upper" name="perihal" id="perihal" maxlength="" placeholder="Masukkan Perihal" required="" style="height: 75px;"></textarea>
+				<textarea class="form-control upper" name="perihal" id="perihal" maxlength="" placeholder="Masukkan Perihal" required="" style="height: 50px;"></textarea>
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
 			<div class="col-md-3 showcase_text_area">
-				<label for="jenissurat" class="mandatory">Jenis Surat</label>
+				<label for="uraian" class="mandatory">Uraian</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<select class="form-control" name="jenissurat" id="jenissurat" required="">
-					<option value="">--- Pilih Jenis Surat ---</option>
-					<option>MASUK</option>
-					<option>KELUAR</option>
-				</select>
+				<textarea class="form-control" name="uraian" id="uraian" maxlength="" placeholder="Masukkan Uraian" required="" style="height: 75px;"></textarea>
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
@@ -48,7 +56,7 @@
 				<label for="tujuandari" class="mandatory">Tujuan/Dari</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<input type="text" class="form-control upper" name="tujuandari" id="tujuandari" maxlength="50" placeholder="Masukkan Tujuan/Dari" required="">
+				<input type="text" class="form-control upper" name="tujuandari" id="tujuandari" maxlength="100" placeholder="Masukkan Tujuan/Dari" required="">
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">

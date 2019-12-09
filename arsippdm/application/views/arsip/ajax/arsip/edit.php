@@ -28,7 +28,7 @@
 				<label for="keteranganE" class="mandatory">Keterangan</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<textarea class="form-control upper" name="keterangan" id="keteranganE" maxlength="" placeholder="Masukkan Keterangan" required="" style="height: 75px;"><?= $keterangan ?></textarea>
+				<textarea class="form-control" name="keterangan" id="keteranganE" maxlength="" placeholder="Masukkan Keterangan" required="" style="height: 75px;"><?= $keterangan ?></textarea>
 			</div>
 		</div>
 	</div>

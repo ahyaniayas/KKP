@@ -116,6 +116,7 @@ class ArsipCont extends CI_Controller {
 		$nomor = $this->input->post("nomor");
 		$tglsurat = $this->input->post("tglsurat");
 		$perihal = $this->input->post("perihal");
+		$uraian = $this->input->post("uraian");
 		$jenissurat = $this->input->post("jenissurat");
 		$tujuandari = $this->input->post("tujuandari");
 
@@ -131,6 +132,7 @@ class ArsipCont extends CI_Controller {
 			"nomor" => $nomor,
 			"tglsurat" => date("Y-m-d", strtotime($tglsurat)),
 			"perihal" => $perihal,
+			"uraian" => $uraian,
 			"jenissurat" => $jenissurat,
 			"tujuandari" => $tujuandari,
 			"file" => $file,
@@ -165,6 +167,7 @@ class ArsipCont extends CI_Controller {
 		$nomor = $this->input->post("nomor");
 		$tglsurat = $this->input->post("tglsurat");
 		$perihal = $this->input->post("perihal");
+		$uraian = $this->input->post("uraian");
 		$jenissurat = $this->input->post("jenissurat");
 		$tujuandari = $this->input->post("tujuandari");
 		$file_lama = $this->input->post("file_lama");
@@ -186,6 +189,7 @@ class ArsipCont extends CI_Controller {
 		$data = array(
 			"tglsurat" => date("Y-m-d", strtotime($tglsurat)),
 			"perihal" => $perihal,
+			"uraian" => $uraian,
 			"jenissurat" => $jenissurat,
 			"tujuandari" => $tujuandari,
 			"file" => $file,

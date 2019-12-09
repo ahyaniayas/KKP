@@ -9,6 +9,7 @@
 	$nomor = $surat[0]->nomor;
 	$tglsurat = $surat[0]->tglsurat;
 	$perihal = $surat[0]->perihal;
+	$uraian = $surat[0]->uraian;
 	$jenissurat = $surat[0]->jenissurat;
 	$tujuandari = $surat[0]->tujuandari;
 	$file = $surat[0]->file;
@@ -21,10 +22,22 @@
 	<div class="modal-body">
 		<div class="form-group row showcase_row_area">
 			<div class="col-md-3 showcase_text_area">
+				<label for="jenissuratE" class="mandatory">Jenis Surat</label>
+			</div>
+			<div class="col-md-9 showcase_content_area">
+				<select class="form-control" name="jenissurat" id="jenissuratE" required="">
+					<option value="">--- Pilih Jenis Surat ---</option>
+					<option <?= ($jenissurat=="MASUK")? "selected": ""; ?>>MASUK</option>
+					<option <?= ($jenissurat=="KELUAR")? "selected": ""; ?>>KELUAR</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row showcase_row_area">
+			<div class="col-md-3 showcase_text_area">
 				<label for="nomorE" class="">Nomor Surat</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<input type="text" class="form-control upper nosurat" name="nomor" id="nomorE" maxlength="" placeholder="99-ZZ-99" value="<?= $nomor ?>" readonly="">
+				<input type="text" class="form-control" name="nomor" id="nomorE" maxlength="50" placeholder="Masukkan No Surat" value="<?= $nomor ?>" readonly="">
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
@@ -40,19 +53,15 @@
 				<label for="perihalE" class="mandatory">Perihal</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<textarea class="form-control upper" name="perihal" id="perihalE" maxlength="" placeholder="Masukkan Perihal" required="" style="height: 75px;"><?= $perihal ?></textarea>
+				<textarea class="form-control upper" name="perihal" id="perihalE" maxlength="" placeholder="Masukkan Perihal" required="" style="height: 50px;"><?= $perihal ?></textarea>
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
 			<div class="col-md-3 showcase_text_area">
-				<label for="jenissuratE" class="mandatory">Jenis Surat</label>
+				<label for="uraianE" class="mandatory">Uraian</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<select class="form-control" name="jenissurat" id="jenissuratE" required="">
-					<option value="">--- Pilih Jenis Surat ---</option>
-					<option <?= ($jenissurat=="MASUK")? "selected": ""; ?>>MASUK</option>
-					<option <?= ($jenissurat=="KELUAR")? "selected": ""; ?>>KELUAR</option>
-				</select>
+				<textarea class="form-control" name="uraian" id="uraianE" maxlength="" placeholder="Masukkan Uraian" required="" style="height: 75px;"><?= $uraian ?></textarea>
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
@@ -60,7 +69,7 @@
 				<label for="tujuandariE" class="mandatory">Tujuan/Dari</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<input type="text" class="form-control upper" name="tujuandari" id="tujuandariE" maxlength="50" placeholder="Masukkan Tujuan/Dari" value="<?= $tujuandari ?>" required="">
+				<input type="text" class="form-control upper" name="tujuandari" id="tujuandariE" maxlength="100" placeholder="Masukkan Tujuan/Dari" value="<?= $tujuandari ?>" required="">
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
