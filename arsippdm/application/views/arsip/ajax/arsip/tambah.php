@@ -21,6 +21,14 @@
 				<textarea class="form-control" name="keterangan" id="keterangan" maxlength="" placeholder="Masukkan Keterangan" required="" style="height: 75px;"></textarea>
 			</div>
 		</div>
+		<div class="form-group row showcase_row_area">
+			<div class="col-md-3 showcase_text_area">
+				<label for="progress" class="">Progress</label>
+			</div>
+			<div class="col-md-9 showcase_content_area">
+				<input type="text" class="form-control upper" name="progress" id="progress" maxlength="150" placeholder="Masukkan Progress">
+			</div>
+		</div>
 	</div>
 	<div class="modal-footer">
 		<button type="submit" class="btn btn-xs btn-primary"><i class="mdi mdi-content-save" title="Tambah"></i></button>

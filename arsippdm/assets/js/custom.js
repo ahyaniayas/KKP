@@ -128,15 +128,6 @@ $(document).ready(function(){
 })
 // end fungsi alertPopup
 
-// mandatory
-function mandatory(){
-  $(".mandatory").append("<i style='color: red; font-style: normal;'> *</i>");
-}
-$(document).ready(function(){
-    mandatory();
-})
-// end mandatory
-
 // text to uppercase
 function upper(){
   $(".upper").keyup(function(e){

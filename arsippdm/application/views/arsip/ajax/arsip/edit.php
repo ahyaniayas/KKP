@@ -8,6 +8,7 @@
 	$id = $arsip[0]->arsip_id;
 	$nama_arsip = $arsip[0]->nama_arsip;
 	$keterangan = $arsip[0]->keterangan;
+	$progress = $arsip[0]->progress;
 ?>
 <form url="<?= base_url('edit-arsip-aksi') ?>" onsubmit="submitData(this, event)">
 	<div class="modal-header">
@@ -29,6 +30,14 @@
 			</div>
 			<div class="col-md-9 showcase_content_area">
 				<textarea class="form-control" name="keterangan" id="keteranganE" maxlength="" placeholder="Masukkan Keterangan" required="" style="height: 75px;"><?= $keterangan ?></textarea>
+			</div>
+		</div>
+		<div class="form-group row showcase_row_area">
+			<div class="col-md-3 showcase_text_area">
+				<label for="progressE" class="">Progress</label>
+			</div>
+			<div class="col-md-9 showcase_content_area">
+				<input type="text" class="form-control upper" name="progress" id="progressE" maxlength="150" value="<?= $progress ?>" placeholder="Masukkan Progress">
 			</div>
 		</div>
 	</div>

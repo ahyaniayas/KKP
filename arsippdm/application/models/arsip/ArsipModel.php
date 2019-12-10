@@ -31,13 +31,22 @@ class ArsipModel extends CI_Model{
 	}
 
 	function getSuratWhere($where){
+		$hasil = $this->db->select("surat.*, no_agenda.no_agenda");
+		$hasil = $this->db->from("surat");
+		$hasil = $this->db->join("no_agenda", "no_agenda.surat_id=surat.surat_id", "left");
 		$hasil = $this->db->where($where);
-		$hasil = $this->db->get('surat');
+		$hasil = $this->db->get();
 		return $hasil;
 	}
 
 	function insSurat($data){
 		$this->db->insert("surat", $data);
+		$insert_id = $this->db->insert_id();
+		return $insert_id;
+	}
+
+	function insNoAgenda($data){
+		$this->db->insert("no_agenda", $data);
 	}
 
 	function updSurat($data, $id){
@@ -49,6 +58,17 @@ class ArsipModel extends CI_Model{
 	function delSurat($id){
 		$this->db->where("surat_id", $id);
 		$this->db->delete("surat");
+	}
+
+	function getNoAgenda(){
+		$hasil = $this->db->select("MAX(no_agenda) max_no_agenda, tahun");
+		$hasil = $this->db->from("no_agenda");
+		$hasil = $this->db->group_by("tahun");
+		$hasil = $this->db->order_by("tahun", "DESC");
+		$hasil = $this->db->limit(1);
+		$hasil = $this->db->get();
+		// echo $this->db->last_query();
+		return $hasil;
 	}
 
 }

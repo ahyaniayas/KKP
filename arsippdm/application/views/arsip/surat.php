@@ -108,7 +108,6 @@
 		$("#tempatForm").load(url, function(responseTxt, statusTxt, xhr){
 			if(statusTxt == "success"){
 				closepopup();
-				mandatory();
 				upper();
 				gijgoDate();
 				numFormat("0,0");

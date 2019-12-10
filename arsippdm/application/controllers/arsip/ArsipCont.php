@@ -29,6 +29,7 @@ class ArsipCont extends CI_Controller {
 	function tambahAksi(){
 		$nama_arsip = $this->input->post("nama_arsip");
 		$keterangan = $this->input->post("keterangan");
+		$progress = $this->input->post("progress");
 
 		$oleh = $this->session->username;
 		$pada = date("Y-m-d H:i:s");
@@ -36,6 +37,7 @@ class ArsipCont extends CI_Controller {
 		$data = array(
 			"nama_arsip" 	=> $nama_arsip,
 			"keterangan" => $keterangan,
+			"progress" => $progress,
 
 			"created_by" 	=> $oleh,
 			"created_on" 	=> $pada
@@ -64,6 +66,7 @@ class ArsipCont extends CI_Controller {
 
 		$nama_arsip = $this->input->post("nama_arsip");
 		$keterangan = $this->input->post("keterangan");
+		$progress = $this->input->post("progress");
 
 		$oleh = $this->session->username;
 		$pada = date("Y-m-d H:i:s");
@@ -71,6 +74,7 @@ class ArsipCont extends CI_Controller {
 		$data = array(
 			"nama_arsip" 	=> $nama_arsip,
 			"keterangan" => $keterangan,
+			"progress" => $progress,
 
 			"updated_by" 	=> $oleh,
 			"updated_on" 	=> $pada
@@ -108,41 +112,79 @@ class ArsipCont extends CI_Controller {
 	function tambahSurat($id){
 		$id = base64_decode($id);
 		$data["idH"] = $id;
+
+		$data_no_agenda = $this->arsipModel->getNoAgenda()->result();
+		$max_no_agenda = empty($data_no_agenda[0]->max_no_agenda)? "": $data_no_agenda[0]->max_no_agenda;
+		$max_tahun_agenda = empty($data_no_agenda[0]->tahun)? "": $data_no_agenda[0]->tahun;
+		$tahun_sekarang = (string) date("Y");
+
+		$no_agenda = ($tahun_sekarang>$max_tahun_agenda)? "1": $max_no_agenda+1;
+		$data["no_agenda"] = str_pad($no_agenda, 5, '0', STR_PAD_LEFT);
+
 		$this->load->view('arsip/ajax/surat/tambah', $data);
 	}
 
 	function tambahSuratAksi(){
 		$arsip_id = $this->input->post("arsip_id");
+		$jenissurat = $this->input->post("jenissurat");
+		$no_agenda = $this->input->post("no_agenda");
 		$nomor = $this->input->post("nomor");
+		$tglditerima = $this->input->post("tglditerima");
 		$tglsurat = $this->input->post("tglsurat");
 		$perihal = $this->input->post("perihal");
-		$uraian = $this->input->post("uraian");
-		$jenissurat = $this->input->post("jenissurat");
-		$tujuandari = $this->input->post("tujuandari");
+		$pengirim = $this->input->post("pengirim");
+		$penerima = $this->input->post("penerima");
+		$disposisi = $this->input->post("disposisi");
 
 		$file_name = $_FILES["file"]['name'];
-		$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
-		$file = $nomor.".".$file_ext;
+
+		if(empty($file_name)){
+			$file = "";
+		}else{
+			$nomorfix = $this->charReplace($nomor);
+			$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
+			$file = $nomorfix.".".$file_ext;
+		}
+
 
 		$oleh = $this->session->username;
 		$pada = date("Y-m-d H:i:s");
 
 		$data = array(
 			"arsip_id" => $arsip_id,
+			"jenissurat" => $jenissurat,
 			"nomor" => $nomor,
+			"tglditerima" => date("Y-m-d", strtotime($tglditerima)),
 			"tglsurat" => date("Y-m-d", strtotime($tglsurat)),
 			"perihal" => $perihal,
-			"uraian" => $uraian,
-			"jenissurat" => $jenissurat,
-			"tujuandari" => $tujuandari,
+			"pengirim" => $pengirim,
+			"penerima" => $penerima,
+			"disposisi" => $disposisi,
 			"file" => $file,
 
 			"created_by" 	=> $oleh,
 			"created_on" 	=> $pada
 		);
-		
-		$this->arsipModel->insSurat($data);
+		$surat_id = $this->arsipModel->insSurat($data);
+
+		if($jenissurat=="MASUK"){
+			$dataNoAgenda = array(
+				"no_agenda" => $no_agenda,
+				"surat_id" => $surat_id,
+				"tahun" => date("Y")
+			);
+			$this->arsipModel->insNoAgenda($dataNoAgenda);
+		}
+
 		$this->aksi_upload($file);
+
+		// Update arsip
+		$data_update_arsip = array(
+			"updated_by" 	=> $oleh,
+			"updated_on" 	=> $pada
+		);
+		$this->arsipModel->upd($data_update_arsip, $arsip_id);
+		// Update arsip
 
 		echo json_encode(array("Tambah Berhasil", "tambah"));
 	}
@@ -164,22 +206,38 @@ class ArsipCont extends CI_Controller {
 
 	function editSuratAksi(){
 		$id = $this->input->post("surat_id");
+		$arsip_id = $this->input->post("arsip_id");
 		$nomor = $this->input->post("nomor");
 		$tglsurat = $this->input->post("tglsurat");
 		$perihal = $this->input->post("perihal");
 		$uraian = $this->input->post("uraian");
 		$jenissurat = $this->input->post("jenissurat");
 		$tujuandari = $this->input->post("tujuandari");
+
 		$file_lama = $this->input->post("file_lama");
 
 		$file_name = $_FILES["file"]['name'];
 
 		if(empty($file_name)){
-			$file = $file_lama;
+			if(empty($file_lama)){
+				$file = "";
+			}else{
+				$file_lama_ext = explode(".", $file_lama)[1];
+				$file = $this->charReplace($nomor).".".$file_lama_ext;
+				if(file_exists('./upload/'.$file_lama)){
+					rename("./upload/".$file_lama, "./upload/".$file);
+				}
+
+			}
 		}else{
-			unlink("./upload/".$file_lama);
+			if(!empty($file_lama)){
+				if(file_exists('./upload/'.$file_lama)){
+					unlink("./upload/".$file_lama);
+				}
+			}
 			$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
-			$file = $nomor.".".$file_ext;
+			$nomorfix = $this->charReplace($nomor);
+			$file = $nomorfix.".".$file_ext;
 		}
 		// echo $file;
 
@@ -187,6 +245,7 @@ class ArsipCont extends CI_Controller {
 		$pada = date("Y-m-d H:i:s");
 
 		$data = array(
+			"nomor" => $nomor,
 			"tglsurat" => date("Y-m-d", strtotime($tglsurat)),
 			"perihal" => $perihal,
 			"uraian" => $uraian,
@@ -199,14 +258,24 @@ class ArsipCont extends CI_Controller {
 		);
 		
 		$this->arsipModel->updSurat($data, $id);
-		$this->aksi_upload($file);
+		if(!empty($file_name)){
+			$this->aksi_upload($file);
+		}
+
+		// Update arsip
+		$data_update_arsip = array(
+			"updated_by" 	=> $oleh,
+			"updated_on" 	=> $pada
+		);
+		$this->arsipModel->upd($data_update_arsip, $arsip_id);
+		// Update arsip
 
 		echo json_encode(array("Edit Berhasil", ""));
 	}
 
 	function hapusSurat($id){
 		$id = base64_decode($id);
-		$where = "surat_id='$id'";
+		$where = "surat.surat_id='$id'";
 		$data['surat'] = $this->arsipModel->getSuratWhere($where)->result();
 		$this->load->view('arsip/ajax/surat/hapus',$data);
 	}
@@ -215,15 +284,20 @@ class ArsipCont extends CI_Controller {
 		$id = $this->input->post("surat_id");
 		$file = $this->input->post("file");
 		$this->arsipModel->delSurat($id);
-		unlink("./upload/".$file);
+
+		if(!empty($file)){
+			if(file_exists('./upload/'.$file)){
+				unlink("./upload/".$file);
+			}
+		}
 		echo json_encode(array("Hapus Berhasil", ""));
 	}
 
 	function aksi_upload($file_name){
 		$config['upload_path'] = './upload/';
 		$config['allowed_types'] = '*';
-		// $config['max_size'] = 0; // unlimited
-		$config['max_size'] = 128; // limited
+		$config['max_size'] = 0; // unlimited
+		// $config['max_size'] = 128; // limited
 		$config['file_name'] = $file_name;
 		// $config['encrypt_name'] = TRUE;
 		// $config['overwrite'] = FALSE;
@@ -243,7 +317,16 @@ class ArsipCont extends CI_Controller {
  
 	function downloadSurat($file){
 		$file = base64_decode($file);			
-		force_download('upload/'.$file, NULL);
+		// force_download('upload/'.$file, NULL);
+		if(file_exists('./upload/'.$file)){
+			redirect(base_url('upload/'.$file));
+		}else{
+			echo "<center>*** file tidak ditemukan ***</center>";
+		}
+	}
+
+	function charReplace($char){
+		return str_replace(array(' ', '/', '.', '(', ')'), '-', $char);
 	}
 
 }

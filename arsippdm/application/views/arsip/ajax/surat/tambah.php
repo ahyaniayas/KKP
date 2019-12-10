@@ -12,11 +12,18 @@
 				<label for="jenissurat" class="mandatory">Jenis Surat</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<select class="form-control" name="jenissurat" id="jenissurat" required="">
-					<option value="">--- Pilih Jenis Surat ---</option>
+				<select class="form-control" name="jenissurat" id="jenissurat" onchange="aksiJenisSurat(this.value)" required="">
 					<option>MASUK</option>
 					<option>KELUAR</option>
 				</select>
+			</div>
+		</div>
+		<div class="form-group row showcase_row_area MASUK">
+			<div class="col-md-3 showcase_text_area">
+				<label for="no_agenda" class="">Nomor Agenda</label>
+			</div>
+			<div class="col-md-9 showcase_content_area">
+				<input type="text" class="form-control IMASUK" name="no_agenda" id="no_agenda" maxlength="5" value="<?= $no_agenda ?>" placeholder="Masukkan No Agenda" readonly="">
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
@@ -24,12 +31,20 @@
 				<label for="nomor" class="mandatory">Nomor Surat</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<input type="text" class="form-control" name="nomor" id="nomor" maxlength="50" placeholder="Masukkan No Surat" required="">
+				<input type="text" class="form-control" name="nomor" id="nomor" maxlength="100" placeholder="Masukkan No Surat" required="">
+			</div>
+		</div>
+		<div class="form-group row showcase_row_area MASUK">
+			<div class="col-md-3 showcase_text_area">
+				<label for="tglditerima" class="mandatory">Tanggal Diterima</label>
+			</div>
+			<div class="col-md-9 showcase_content_area">
+				<input type="text" class="form-control datepicker IMASUK" name="tglditerima" id="tglditerima" maxlength="" placeholder="dd-mm-yyyy" required="">
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
 			<div class="col-md-3 showcase_text_area">
-				<label for="tglsurat" class="mandatory">Tanggal</label>
+				<label for="tglsurat" class="mandatory">Tanggal Surat</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
 				<input type="text" class="form-control datepicker" name="tglsurat" id="tglsurat" maxlength="" placeholder="dd-mm-yyyy" required="">
@@ -45,27 +60,35 @@
 		</div>
 		<div class="form-group row showcase_row_area">
 			<div class="col-md-3 showcase_text_area">
-				<label for="uraian" class="mandatory">Uraian</label>
+				<label for="pengirim" class="mandatory">Pengirim</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<textarea class="form-control" name="uraian" id="uraian" maxlength="" placeholder="Masukkan Uraian" required="" style="height: 75px;"></textarea>
+				<input type="text" class="form-control upper" name="pengirim" id="pengirim" maxlength="100" placeholder="Masukkan Pengirim" required="">
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
 			<div class="col-md-3 showcase_text_area">
-				<label for="tujuandari" class="mandatory">Tujuan/Dari</label>
+				<label for="penerima" class="mandatory">Penerima</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<input type="text" class="form-control upper" name="tujuandari" id="tujuandari" maxlength="100" placeholder="Masukkan Tujuan/Dari" required="">
+				<input type="text" class="form-control upper" name="penerima" id="penerima" maxlength="100" placeholder="Masukkan Penerima" required="">
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
 			<div class="col-md-3 showcase_text_area">
-				<label for="file" class="mandatory">File</label>
+				<label for="disposisi" class="">Disposisi / Catatan</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<input type="file" name="file" id="file" required="">
-				<p class="text-danger">* Sementara upload file maksimal 120kb</p>
+				<textarea class="form-control" name="disposisi" id="disposisi" maxlength="" placeholder="Masukkan Disposisi / Catatan" style="height: 75px;"></textarea>
+			</div>
+		</div>
+		<div class="form-group row showcase_row_area">
+			<div class="col-md-3 showcase_text_area">
+				<label for="file" class="LFILE">File</label>
+			</div>
+			<div class="col-md-9 showcase_content_area">
+				<input type="file" class="IFILE" name="file" id="file">
+				<!-- <p class="text-danger">* Sementara upload file maksimal 120kb</p> -->
 			</div>
 		</div>
 	</div>
@@ -75,3 +98,20 @@
 		<button type="button" class="btn btn-xs btn-secondary" data-dismiss="modal" title="Batal"><i>&times;</i></button>
 	</div>
 </form>
+<script>
+	function aksiJenisSurat(jenis){
+		if(jenis=="MASUK"){
+			$(".IMASUK").removeAttr("disabled");
+			$(".MASUK").show("fast");
+
+			$(".LFILE").removeClass("mandatory");
+			$(".IFILE").removeAttr("required");
+		}else if(jenis=="KELUAR"){
+			$(".IMASUK").attr("disabled", "");
+			$(".MASUK").hide("fast");
+
+			$(".LFILE").addClass("mandatory");
+			$(".IFILE").attr("required", "");
+		}
+	}
+</script>

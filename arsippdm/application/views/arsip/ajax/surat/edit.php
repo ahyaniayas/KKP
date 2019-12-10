@@ -6,6 +6,7 @@
 	}
 
 	$id = $surat[0]->surat_id;
+	$arsip_id = $surat[0]->arsip_id;
 	$nomor = $surat[0]->nomor;
 	$tglsurat = $surat[0]->tglsurat;
 	$perihal = $surat[0]->perihal;
@@ -34,10 +35,10 @@
 		</div>
 		<div class="form-group row showcase_row_area">
 			<div class="col-md-3 showcase_text_area">
-				<label for="nomorE" class="">Nomor Surat</label>
+				<label for="nomorE" class="mandatory">Nomor Surat</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<input type="text" class="form-control" name="nomor" id="nomorE" maxlength="50" placeholder="Masukkan No Surat" value="<?= $nomor ?>" readonly="">
+				<input type="text" class="form-control" name="nomor" id="nomorE" maxlength="50" placeholder="Masukkan No Surat" value="<?= $nomor ?>" required="">
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
@@ -78,12 +79,13 @@
 			</div>
 			<div class="col-md-9 showcase_content_area">
 				<input type="file" name="file" id="fileE">
-				<p class="text-danger">* Sementara upload file maksimal 120kb</p>
+				<!-- <p class="text-danger">* Sementara upload file maksimal 120kb</p> -->
 			</div>
 		</div>
 	</div>
 	<div class="modal-footer">
 		<input type="hidden" name="surat_id" value="<?= $id ?>" >
+		<input type="hidden" name="arsip_id" value="<?= $arsip_id ?>" >
 		<input type="hidden" name="file_lama" value="<?= $file ?>" >
 		<button type="submit" class="btn btn-xs btn-primary"><i class="mdi mdi-content-save" title="Edit"></i></button>
 		<button type="button" class="btn btn-xs btn-secondary" data-dismiss="modal" title="Batal"><i>&times;</i></button>

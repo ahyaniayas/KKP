@@ -5,12 +5,14 @@
 			<td><strong>Nama Arsip</strong></td>
 			<td><strong>Keterangan</strong></td>
 			<td style="width: 12%;"><strong>Total Surat</strong></td>
+			<td><strong>Progress</strong></td>
 			<td style="width: 15%;"><strong>Dibuat Pada</strong></td>
 		</tr>
 		<tr>
 			<th>Nama Arsip</th>
 			<th>Keterangan</th>
 			<th>Total Surat</th>
+			<th>Progress</th>
 			<th>Dibuat Pada</th>
 		</tr>
 	</thead>
@@ -23,6 +25,7 @@
 			$nama_arsip = $isi->nama_arsip;
 			$keterangan = $isi->keterangan;
 			$jml_surat = $isi->jml_surat;
+			$progress = $isi->progress;
 			$created_on = $isi->created_on;
 
 			$urlEdit = base_url($idBase64."/edit-arsip");
@@ -56,6 +59,7 @@
 			</td>
 			<td><?= $keterangan ?></td>
 			<td><?= number_format($jml_surat) ?> Surat</td>
+			<td><?= $progress ?></td>
 			<td>
 				<span class="d-none"><?= strtotime($created_on) ?></span>
 				<?= date("d-m-Y", strtotime($created_on)) ?>	
