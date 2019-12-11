@@ -294,7 +294,7 @@ function jam(url, target){
     var minutes = date.getMinutes();
     var seconds = date.getSeconds();
 
-    var jamsekarang = hours + ":" + minutes + ":" + seconds;
+    var jamsekarang = ("0" + hours).slice(-2) + ":" + ("0" + minutes).slice(-2) + ":" + ("0" + seconds).slice(-2);
 
     $(target).html(jamsekarang);
   }, 1000);
