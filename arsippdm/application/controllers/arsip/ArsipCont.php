@@ -146,6 +146,7 @@ class ArsipCont extends CI_Controller {
 		$arsip_id = $this->input->post("arsip_id");
 		$jenissurat = $this->input->post("jenissurat");
 		$no_agenda = $this->input->post("no_agenda");
+		$tahun = date("Y");
 		$nomor = $this->input->post("nomor");
 		$tglditerima = $this->input->post("tglditerima");
 		$tglsurat = $this->input->post("tglsurat");
@@ -161,7 +162,11 @@ class ArsipCont extends CI_Controller {
 		}else{
 			$nomorfix = $this->charReplace($nomor);
 			$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
-			$file = $nomorfix.".".$file_ext;
+			if($jenissurat=="MASUK"){
+				$file = $nomorfix."-".$no_agenda.$tahun.".".$file_ext;
+			}elseif ($jenissurat=="KELUAR") {
+				$file = $nomorfix.".".$file_ext;
+			}
 		}
 
 		$oleh = $this->session->username;
@@ -197,7 +202,7 @@ class ArsipCont extends CI_Controller {
 				$dataNoAgenda = array(
 					"no_agenda" => $no_agenda,
 					"surat_id" => $surat_id,
-					"tahun" => date("Y")
+					"tahun" => $tahun
 				);
 				$this->arsipModel->insNoAgenda($dataNoAgenda);
 			}
@@ -245,6 +250,8 @@ class ArsipCont extends CI_Controller {
 
 		$file_lama = $this->input->post("file_lama");
 		$nomor_lama = $this->input->post("nomor_lama");
+		$no_agenda = $this->input->post("no_agenda");
+		$tahun = $this->input->post("tahun");
 
 		$file_name = $_FILES["file"]['name'];
 
@@ -258,12 +265,18 @@ class ArsipCont extends CI_Controller {
 			echo json_encode(array("Edit Gagal, Nomor surat duplikat", ""));
 		}else{
 
+			$nomorfix = $this->charReplace($nomor);
 			if(empty($file_name)){
 				if(empty($file_lama)){
 					$file = "";
 				}else{
 					$file_lama_ext = explode(".", $file_lama)[1];
-					$file = $this->charReplace($nomor).".".$file_lama_ext;
+					if($jenissurat=="MASUK"){
+						$file = $nomorfix."-".$no_agenda.$tahun.".".$file_lama_ext;
+					}elseif ($jenissurat=="KELUAR") {
+						$file = $nomorfix.".".$file_lama_ext;
+					}
+
 					if(file_exists('./upload/'.$file_lama)){
 						rename("./upload/".$file_lama, "./upload/".$file);
 					}
@@ -276,8 +289,11 @@ class ArsipCont extends CI_Controller {
 					}
 				}
 				$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
-				$nomorfix = $this->charReplace($nomor);
-				$file = $nomorfix.".".$file_ext;
+				if($jenissurat=="MASUK"){
+					$file = $nomorfix."-".$no_agenda.$tahun.".".$file_ext;
+				}elseif ($jenissurat=="KELUAR") {
+					$file = $nomorfix.".".$file_ext;
+				}
 			}
 			// echo $file;
 

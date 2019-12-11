@@ -37,7 +37,7 @@ class ArsipModel extends CI_Model{
 	}
 
 	function getSuratWhere($where){
-		$hasil = $this->db->select("surat.*, no_agenda.no_agenda");
+		$hasil = $this->db->select("surat.*, no_agenda.no_agenda, no_agenda.tahun");
 		$hasil = $this->db->from("surat");
 		$hasil = $this->db->join("no_agenda", "no_agenda.surat_id=surat.surat_id", "left");
 		$hasil = $this->db->where($where);

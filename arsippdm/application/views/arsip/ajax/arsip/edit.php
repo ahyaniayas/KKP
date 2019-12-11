@@ -42,8 +42,8 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-		<input type="hidden" name="nama_arsip_lama" value="<?= $nama_arsip ?>" >
 		<input type="hidden" name="arsip_id" value="<?= $id ?>" >
+		<input type="hidden" name="nama_arsip_lama" value="<?= $nama_arsip ?>" >
 		<button type="submit" class="btn btn-xs btn-primary"><i class="mdi mdi-content-save" title="Edit"></i></button>
 		<button type="button" class="btn btn-xs btn-secondary" data-dismiss="modal" title="Batal"><i>&times;</i></button>
 	</div>

@@ -8,6 +8,7 @@
 	$id = $surat[0]->surat_id;
 	$arsip_id = $surat[0]->arsip_id;
 	$no_agenda = $surat[0]->no_agenda;
+	$tahun = $surat[0]->tahun;
 	$nomor = $surat[0]->nomor;
 	$jenissurat = $surat[0]->jenissurat;
 	$tglditerima = $surat[0]->tglditerima;
@@ -122,6 +123,7 @@
 		<input type="hidden" name="file_lama" value="<?= $file ?>" >
 		<input type="hidden" name="nomor_lama" value="<?= $nomor ?>" >
 		<input type="hidden" name="jenissurathide" value="<?= $jenissurat ?>" >
+		<input type="hidden" name="tahun" value="<?= $tahun ?>" >
 		<button type="submit" class="btn btn-xs btn-primary"><i class="mdi mdi-content-save" title="Edit"></i></button>
 		<button type="button" class="btn btn-xs btn-secondary" data-dismiss="modal" title="Batal"><i>&times;</i></button>
 	</div>
