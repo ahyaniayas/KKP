@@ -46,6 +46,71 @@
 
     </div>
   </div>
+
+  <!-- modals -->
+  <!-- modal for TAMBAH, EDIT, LIHAT, HAPUS -->
+  <div class="modal fade" id="modalForm">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content" id="tempatForm">
+      </div>
+    </div>
+  </div>
+  <!-- end modals -->
+
 </div>
+
+<script>
+
+  function submitData(ini, e){
+    e.preventDefault();
+    showLoading();
+    var URL = $(ini).attr("url");
+
+    var formData = new FormData(ini);
+    $.ajax({
+      type:'POST',
+      url: URL,
+      data:formData,
+      cache:false,
+      contentType: false,
+      processData: false,
+      success:function(RESPONS){
+        var respons = JSON.parse(RESPONS);
+        if(respons[1]=="tambah"){
+          getForm("<?= base_url('tambah-user') ?>");
+        }else{
+          $(".modal").modal("hide");
+        }
+        alertPopup(respons[0]);
+        // resetTable(tblUrl, tempatTbl);
+        hideLoading();
+      },
+      error : function(respons){
+        alertPopup("Proses Gagal");
+        $(".modal").modal("hide");
+        hideLoading();
+      }
+
+    })
+  }
+
+  function getForm(tujuan){
+    showLoading();
+    var url = tujuan;
+    $("#tempatForm").load(url, function(responseTxt, statusTxt, xhr){
+      if(statusTxt == "success"){
+        closepopup();
+        upper();
+        $("#modalForm").modal("show");
+        hideLoading();
+      }
+      if(statusTxt == "error"){
+        alert("Error: " + xhr.status + ": " + xhr.statusText, "error");
+        hideLoading();
+      }
+    });
+  }
+</script>
+
 <!-- content viewport ends -->
 <?php $this->load->view('_part/footer'); ?>

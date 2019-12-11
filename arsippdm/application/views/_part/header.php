@@ -1,6 +1,8 @@
 <?php
   $segment1 = $this->uri->segment(1);
-  $iduserlogin = $this->session->userdata('user_id');
+  $user_id = $this->session->userdata('user_id');
+  $user_idBase64 = str_replace('=', '', base64_encode($user_id));
+
   $no_induk = $this->session->no_induk;
   $username = $this->session->username;
   $nama = $this->session->nama;
@@ -96,6 +98,13 @@
             </a>
           </li>
 
+          <li>
+            <a href="#" onclick="getForm('<?= base_url($user_idBase64.'/gantipassword') ?>')">
+              <span class="link-title">Ganti Password</span>
+              <i class="mdi mdi-key link-icon"></i>
+            </a>
+          </li>
+
           <?php
             $konfActive="";
             $konfAria="false";
@@ -116,9 +125,9 @@
               <li>
                 <a class="<?= ($segment1=='user')? 'active': ''; ?>" href="<?= base_url('user') ?>">Pengguna</a>
               </li>
-              <li>
+              <!-- <li>
                 <a class="" href="">Tampilan</a>
-              </li>
+              </li> -->
             </ul>
           </li>
           <?php } ?>

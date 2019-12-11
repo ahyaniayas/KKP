@@ -121,3 +121,8 @@ $route['hapus-surat-aksi'] = 'arsip/arsipCont/hapusSuratAksi';
 $route['(:any)/downsurat'] = 'arsip/arsipCont/downloadSurat/$1';
 $route['(:any)/laporansurat'] = 'report/reportCont/surat/$1';
 // end surat
+
+// password
+$route['(:any)/gantipassword'] = 'user/passCont/gantiPass/$1';
+$route['gantipassword-aksi'] = 'user/passCont/gantiPassAksi';
+// end password

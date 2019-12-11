@@ -45,7 +45,7 @@
 				<label for="passwordE" class="">Password</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<input type="text" class="form-control" name="password" id="passwordE" maxlength="15" placeholder="Masukkan Password">
+				<input type="text" class="form-control" name="password" id="passwordE" maxlength="6" placeholder="Masukkan Password">
 			</div>
 		</div>
 	</div>
