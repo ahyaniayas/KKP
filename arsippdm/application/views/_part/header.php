@@ -1,7 +1,11 @@
 <?php
   $segment1 = $this->uri->segment(1);
   $iduserlogin = $this->session->userdata('user_id');
+  $no_induk = $this->session->no_induk;
   $username = $this->session->username;
+  $nama = $this->session->nama;
+
+  // print_r($this->session);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +67,7 @@
           </form> -->
           <ul class="nav ml-auto">
             <li style="margin: 0 5px;">
-              <?= strtoupper($username) ?>
+              <?= $nama ?>
             </li>
             <li style="margin: 0 5px;">
               <strong id="jam">00:00:00</strong>
@@ -91,6 +95,33 @@
               <i class="mdi mdi-file-document link-icon"></i>
             </a>
           </li>
+
+          <?php
+            $konfActive="";
+            $konfAria="false";
+            $konfUl="";
+            if($segment1=='user'){
+              $konfActive="active";
+              $konfAria="true";
+              $konfUl="show";
+            }
+          ?>
+          <?php if($no_induk=="999999999"){ ?>
+          <li class="<?= $konfActive ?>">
+            <a href="#navigation1" data-toggle="collapse" aria-expanded="<?= $konfAria ?>">
+              <span class="link-title">Konfigurasi</span>
+              <i class="mdi mdi-settings link-icon"></i>
+            </a>
+            <ul class="collapse navigation-submenu <?= $konfUl ?>" id="navigation1">
+              <li>
+                <a class="<?= ($segment1=='user')? 'active': ''; ?>" href="<?= base_url('user') ?>">Pengguna</a>
+              </li>
+              <li>
+                <a class="" href="">Tampilan</a>
+              </li>
+            </ul>
+          </li>
+          <?php } ?>
           
           <li>
             <a href="<?= base_url('login') ?>">

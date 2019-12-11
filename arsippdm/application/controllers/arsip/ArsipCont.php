@@ -170,8 +170,6 @@ class ArsipCont extends CI_Controller {
 		if($jenissurat=="KELUAR"){
 			$whereCek = "nomor='$nomor' && jenissurat='KELUAR'";
 			$jmlCek = $this->arsipModel->getSuratWhere($whereCek)->num_rows();
-		}elseif ($jenissurat=="MASUK") {
-			$jmlCek = 0;
 		}
 
 		if($jmlCek>0){
@@ -252,8 +250,6 @@ class ArsipCont extends CI_Controller {
 		if($jenissurat=="KELUAR"){
 			$whereCek = "nomor='$nomor' && jenissurat='KELUAR'";
 			$jmlCek = $this->arsipModel->getSuratWhere($whereCek)->num_rows();
-		}elseif ($jenissurat=="MASUK") {
-			$jmlCek = 0;
 		}
 
 		if($jmlCek>0 && $nomor!=$nomor_lama){

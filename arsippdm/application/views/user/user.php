@@ -1,5 +1,6 @@
 <?php $this->load->view('_part/header'); ?>
 <?php
+	$judulH = "Konfigurasi";
 	$judul = "Pengguna";
 ?>
 <div class="page-content-wrapper-inner">
@@ -9,10 +10,7 @@
 				<li class="breadcrumb-item">
 					<a href="<?= base_url() ?>">Dashboard</a>
 				</li>
-				<li class="breadcrumb-item">
-					<a href="#">Manajemen Data</a>
-				</li>
-				<li class="breadcrumb-item active" aria-current="page"><?= $judul ?></li>
+				<li class="breadcrumb-item active" aria-current="page"><?= $judulH." ".$judul ?></li>
 			</ol>
 		</nav>
 	</div>
@@ -71,12 +69,14 @@
 			    }else{
 			    	$(".modal").modal("hide");
 			    }
-		    	alert(respons[0], "success");
+		    	// alert(respons[0], "success");
+		    	alertPopup(respons[0]);
 				resetTable(tblUrl, tempatTbl);
 				hideLoading();
 			},
 			error : function(respons){
-				alert("Proses Gagal", "error");
+				// alert("Proses Gagal", "error");
+				alertPopup("Proses Gagal");
 		    	$(".modal").modal("hide");
 		    	hideLoading();
 			}
@@ -90,7 +90,6 @@
 		$("#tempatForm").load(url, function(responseTxt, statusTxt, xhr){
 			if(statusTxt == "success"){
 				closepopup();
-				mandatory();
 				upper();
 				$("#modalForm").modal("show");
 				hideLoading();

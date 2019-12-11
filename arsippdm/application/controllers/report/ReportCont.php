@@ -7,6 +7,10 @@ class ReportCont extends CI_Controller {
 		parent::__construct();
 		$this->load->library('PdfLib');
 		$this->load->model('arsip/arsipModel');
+
+		if(empty($this->session->username)){
+			redirect(base_url("login"));
+		}
 	}
 
 	// function jadwal($link){

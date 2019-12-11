@@ -7,18 +7,26 @@
 	<div class="modal-body">
 		<div class="form-group row showcase_row_area">
 			<div class="col-md-3 showcase_text_area">
-				<label for="namaTambah" class="mandatory">Nama </label>
+				<label for="no_induk" class="mandatory">No Induk</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<input type="text" class="form-control upper" name="nama" id="namaTambah" maxlength="25" placeholder="Masukkan Nama" required="">
+				<input type="text" class="form-control upper" name="no_induk" id="no_induk" maxlength="25" placeholder="Masukkan No Induk" required="">
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
 			<div class="col-md-3 showcase_text_area">
-				<label for="kontakTambah" class="mandatory">Kontak</label>
+				<label for="nama" class="mandatory">Nama</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<input type="number" class="form-control upper" name="kontak" id="kontakTambah" maxlength="" placeholder="Masukkan Kontak" required="">
+				<input type="text" class="form-control upper" name="nama" id="nama" maxlength="25" placeholder="Masukkan Nama" required="">
+			</div>
+		</div>
+		<div class="form-group row showcase_row_area">
+			<div class="col-md-3 showcase_text_area">
+				<label for="username" class="mandatory">Username</label>
+			</div>
+			<div class="col-md-9 showcase_content_area">
+				<input type="text" class="form-control" name="username" id="username" maxlength="15" placeholder="Masukkan Username" required="">
 			</div>
 		</div>
 	</div>
