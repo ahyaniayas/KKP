@@ -167,6 +167,7 @@ class ArsipCont extends CI_Controller {
 		$oleh = $this->session->username;
 		$pada = date("Y-m-d H:i:s");
 
+		$jmlCek = "";
 		if($jenissurat=="KELUAR"){
 			$whereCek = "nomor='$nomor' && jenissurat='KELUAR'";
 			$jmlCek = $this->arsipModel->getSuratWhere($whereCek)->num_rows();
@@ -247,6 +248,7 @@ class ArsipCont extends CI_Controller {
 
 		$file_name = $_FILES["file"]['name'];
 
+		$jmlCek = "";
 		if($jenissurat=="KELUAR"){
 			$whereCek = "nomor='$nomor' && jenissurat='KELUAR'";
 			$jmlCek = $this->arsipModel->getSuratWhere($whereCek)->num_rows();
