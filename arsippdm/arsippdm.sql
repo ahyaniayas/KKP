@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Des 2019 pada 02.59
+-- Waktu pembuatan: 11 Des 2019 pada 13.00
 -- Versi server: 10.1.34-MariaDB
 -- Versi PHP: 7.2.7
 
@@ -38,6 +38,13 @@ CREATE TABLE `arsip` (
   `updated_by` varchar(25) DEFAULT NULL,
   `updated_on` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `arsip`
+--
+
+INSERT INTO `arsip` (`arsip_id`, `nama_arsip`, `keterangan`, `progress`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
+(1, 'TES1', 'dfsdfa', 'DFA', 'admin', '2019-12-11 10:15:32', 'admin', '2019-12-11 18:34:46');
 
 -- --------------------------------------------------------
 
@@ -76,6 +83,13 @@ CREATE TABLE `surat` (
   `updated_on` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `surat`
+--
+
+INSERT INTO `surat` (`surat_id`, `arsip_id`, `jenissurat`, `nomor`, `tglsurat`, `tglditerima`, `perihal`, `pengirim`, `penerima`, `disposisi`, `file`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
+(1, 1, 'KELUAR', '123', '2019-12-11', '0000-00-00', 'FDASDF', 'FDWFASDF', 'ASDFSADF', 'sdfasd', '123.png', 'admin', '2019-12-11 18:29:05', 'admin', '2019-12-11 18:34:46');
+
 -- --------------------------------------------------------
 
 --
@@ -84,7 +98,7 @@ CREATE TABLE `surat` (
 
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
-  `no_induk` varchar(15) DEFAULT NULL,
+  `no_induk` varchar(25) DEFAULT NULL,
   `nama` varchar(25) DEFAULT NULL,
   `no_tlp` varchar(15) DEFAULT NULL,
   `alamat` varchar(50) DEFAULT NULL,
@@ -102,7 +116,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `no_induk`, `nama`, `no_tlp`, `alamat`, `username`, `password`, `password_text`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
-(1, '', 'admin pdm', '021', 'bekasi', 'admin', 'c56d0e9a7ccec67b4ea131655038d604', '123456', 'system', '2019-12-02 14:21:20', NULL, NULL);
+(1, '999999999', 'ADMIN PDM', '021', 'bekasi', 'admin', 'c56d0e9a7ccec67b4ea131655038d604', '123456', 'system', '2019-12-02 14:21:20', 'admin', '2019-12-11 17:54:49'),
+(4, '123456', 'AHYANI', NULL, NULL, 'ahyani', 'c56d0e9a7ccec67b4ea131655038d604', '123456', 'admin', '2019-12-11 17:55:35', 'ahyani', '2019-12-11 18:59:25');
 
 --
 -- Indexes for dumped tables
@@ -112,7 +127,8 @@ INSERT INTO `user` (`user_id`, `no_induk`, `nama`, `no_tlp`, `alamat`, `username
 -- Indeks untuk tabel `arsip`
 --
 ALTER TABLE `arsip`
-  ADD PRIMARY KEY (`arsip_id`);
+  ADD PRIMARY KEY (`arsip_id`),
+  ADD UNIQUE KEY `nama_arsip` (`nama_arsip`);
 
 --
 -- Indeks untuk tabel `no_agenda`
@@ -143,7 +159,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `arsip`
 --
 ALTER TABLE `arsip`
-  MODIFY `arsip_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `arsip_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `no_agenda`
@@ -155,13 +171,13 @@ ALTER TABLE `no_agenda`
 -- AUTO_INCREMENT untuk tabel `surat`
 --
 ALTER TABLE `surat`
-  MODIFY `surat_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `surat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
