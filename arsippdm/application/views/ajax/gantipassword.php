@@ -13,7 +13,7 @@
 				<label for="password_lama" class="mandatory">Password Lama</label>
 			</div>
 			<div class="col-md-8 showcase_content_area">
-				<input type="text" class="form-control" name="password_lama" id="password_lama" maxlength="6" placeholder="Masukkan Password Lama" required="">
+				<input type="password" class="form-control" name="password_lama" id="password_lama" maxlength="6" placeholder="Masukkan Password Lama" required="">
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">
@@ -21,7 +21,7 @@
 				<label for="password_baru" class="mandatory">Password Baru</label>
 			</div>
 			<div class="col-md-8 showcase_content_area">
-				<input type="text" class="form-control" name="password_baru" id="password_baru" maxlength="6" placeholder="Masukkan Password Lama" required="">
+				<input type="password" class="form-control" name="password_baru" id="password_baru" maxlength="6" placeholder="Masukkan Password Lama" required="">
 			</div>
 		</div>
 	</div>

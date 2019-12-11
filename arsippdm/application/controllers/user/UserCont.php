@@ -79,7 +79,7 @@ class UserCont extends CI_Controller {
 
 		$no_induk = $this->input->post("no_induk");
 		$nama = $this->input->post("nama");
-		$username = $this->input->post("username");
+		// $username = $this->input->post("username");
 		$password = $this->input->post("password");
 
 		$no_induk_lama = $this->input->post("no_induk_lama");
@@ -91,19 +91,19 @@ class UserCont extends CI_Controller {
 		$whereCek1 = "no_induk='$no_induk'";
 		$jmlCek1 = $this->userModel->getWhere($whereCek1)->num_rows();
 
-		$whereCek2 = "username='$username'";
-		$jmlCek2 = $this->userModel->getWhere($whereCek2)->num_rows();
+		// $whereCek2 = "username='$username'";
+		// $jmlCek2 = $this->userModel->getWhere($whereCek2)->num_rows();
 
 		if($jmlCek1>0 && $no_induk!=$no_induk_lama){
 			echo json_encode(array("Edit Gagal, No Induk duplikat", ""));
-		}elseif($jmlCek2>0 && $username!=$username_lama){
-			echo json_encode(array("Edit Gagal, Username duplikat", ""));
+		// }elseif($jmlCek2>0 && $username!=$username_lama){
+		// 	echo json_encode(array("Edit Gagal, Username duplikat", ""));
 		}else{
 
 			$data = array(
 				"no_induk" 		=> $no_induk,
 				"nama" 		=> $nama,
-				"username" 	=> $username,
+				// "username" 	=> $username,
 
 				"updated_by" 	=> $oleh,
 				"updated_on" 	=> $pada
