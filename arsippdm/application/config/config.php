@@ -25,11 +25,15 @@ date_default_timezone_set("Asia/Jakarta");
 |
 */
 // $config['base_url'] = 'http://172.16.19.18/acara'; // pc kantor
-$config['base_url'] = 'http://192.168.43.207/github/KKP/arsippdm'; // wifi dari hp
+// $config['base_url'] = 'http://192.168.43.207/github/KKP/arsippdm'; // wifi dari hp
 // $config['base_url'] = 'http://192.168.43.207/github/KKP/arsippdm'; // wifi dari hp
 // $config['base_url'] = 'http://e-arsip.pdmbekasi.com'; // virtual host xampp
 // $config['base_url'] = 'http://172.16.18.208/proj/acara'; // ip btn
 // $config['base_url'] = 'http://172.16.15.16/github/KKP/arsippdm'; // wifi kantor
+$config['base_url'] = 
+(isset($_SERVER['HTTPS']) ? "https://" : "http://").
+$_SERVER['HTTP_HOST'].
+str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 
 /*
 |--------------------------------------------------------------------------
