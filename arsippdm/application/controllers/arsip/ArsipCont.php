@@ -34,18 +34,26 @@ class ArsipCont extends CI_Controller {
 		$oleh = $this->session->username;
 		$pada = date("Y-m-d H:i:s");
 
-		$data = array(
-			"nama_arsip" 	=> $nama_arsip,
-			"keterangan" => $keterangan,
-			"progress" => $progress,
+		$whereCek = "nama_arsip='$nama_arsip'";
+		$jmlCek = $this->arsipModel->getWhere($whereCek)->num_rows();
 
-			"created_by" 	=> $oleh,
-			"created_on" 	=> $pada
-		);
-		
-		$this->arsipModel->ins($data);
+		if($jmlCek>0){
+			echo json_encode(array("Tambah Gagal, Nama arsip duplikat", ""));
+		}else{
 
-		echo json_encode(array("Tambah Berhasil", "tambah"));
+			$data = array(
+				"nama_arsip" 	=> $nama_arsip,
+				"keterangan" => $keterangan,
+				"progress" => $progress,
+
+				"created_by" 	=> $oleh,
+				"created_on" 	=> $pada
+			);
+			
+			$this->arsipModel->ins($data);
+
+			echo json_encode(array("Tambah Berhasil", "tambah"));
+		}
 	}
 
 	function edit($id){
@@ -68,20 +76,30 @@ class ArsipCont extends CI_Controller {
 		$keterangan = $this->input->post("keterangan");
 		$progress = $this->input->post("progress");
 
+		$nama_arsip_lama = $this->input->post("nama_arsip_lama");
+
 		$oleh = $this->session->username;
 		$pada = date("Y-m-d H:i:s");
 
-		$data = array(
-			"nama_arsip" 	=> $nama_arsip,
-			"keterangan" => $keterangan,
-			"progress" => $progress,
+		$whereCek = "nama_arsip='$nama_arsip'";
+		$jmlCek = $this->arsipModel->getWhere($whereCek)->num_rows();
 
-			"updated_by" 	=> $oleh,
-			"updated_on" 	=> $pada
-		);
+		if($jmlCek>0 && $nama_arsip!=$nama_arsip_lama){
+			echo json_encode(array("Edit Gagal, Nama arsip duplikat", ""));
+		}else{
 
-		$this->arsipModel->upd($data, $id);
-		echo json_encode(array("Edit Berhasil", ""));
+			$data = array(
+				"nama_arsip" 	=> $nama_arsip,
+				"keterangan" => $keterangan,
+				"progress" => $progress,
+
+				"updated_by" 	=> $oleh,
+				"updated_on" 	=> $pada
+			);
+
+			$this->arsipModel->upd($data, $id);
+			echo json_encode(array("Edit Berhasil", ""));
+		}
 	}
 
 	function hapus($id){
@@ -146,59 +164,69 @@ class ArsipCont extends CI_Controller {
 			$file = $nomorfix.".".$file_ext;
 		}
 
-
 		$oleh = $this->session->username;
 		$pada = date("Y-m-d H:i:s");
 
-		$data = array(
-			"arsip_id" => $arsip_id,
-			"jenissurat" => $jenissurat,
-			"nomor" => $nomor,
-			"tglditerima" => date("Y-m-d", strtotime($tglditerima)),
-			"tglsurat" => date("Y-m-d", strtotime($tglsurat)),
-			"perihal" => $perihal,
-			"pengirim" => $pengirim,
-			"penerima" => $penerima,
-			"disposisi" => $disposisi,
-			"file" => $file,
-
-			"created_by" 	=> $oleh,
-			"created_on" 	=> $pada
-		);
-		$surat_id = $this->arsipModel->insSurat($data);
-
-		if($jenissurat=="MASUK"){
-			$dataNoAgenda = array(
-				"no_agenda" => $no_agenda,
-				"surat_id" => $surat_id,
-				"tahun" => date("Y")
-			);
-			$this->arsipModel->insNoAgenda($dataNoAgenda);
+		if($jenissurat=="KELUAR"){
+			$whereCek = "nomor='$nomor' && jenissurat='KELUAR'";
+			$jmlCek = $this->arsipModel->getSuratWhere($whereCek)->num_rows();
+		}elseif ($jenissurat=="MASUK") {
+			$jmlCek = 0;
 		}
 
-		$this->aksi_upload($file);
+		if($jmlCek>0){
+			echo json_encode(array("Tambah Gagal, Nomor surat duplikat", ""));
+		}else{
+			$data = array(
+				"arsip_id" => $arsip_id,
+				"jenissurat" => $jenissurat,
+				"nomor" => $nomor,
+				"tglditerima" => $jenissurat=="MASUK"? date("Y-m-d", strtotime($tglditerima)): "",
+				"tglsurat" => date("Y-m-d", strtotime($tglsurat)),
+				"perihal" => $perihal,
+				"pengirim" => $pengirim,
+				"penerima" => $penerima,
+				"disposisi" => $disposisi,
+				"file" => $file,
 
-		// Update arsip
-		$data_update_arsip = array(
-			"updated_by" 	=> $oleh,
-			"updated_on" 	=> $pada
-		);
-		$this->arsipModel->upd($data_update_arsip, $arsip_id);
-		// Update arsip
+				"created_by" 	=> $oleh,
+				"created_on" 	=> $pada
+			);
+			$surat_id = $this->arsipModel->insSurat($data);
 
-		echo json_encode(array("Tambah Berhasil", "tambah"));
+			if($jenissurat=="MASUK"){
+				$dataNoAgenda = array(
+					"no_agenda" => $no_agenda,
+					"surat_id" => $surat_id,
+					"tahun" => date("Y")
+				);
+				$this->arsipModel->insNoAgenda($dataNoAgenda);
+			}
+
+			$this->aksi_upload($file);
+
+			// Update arsip
+			$data_update_arsip = array(
+				"updated_by" 	=> $oleh,
+				"updated_on" 	=> $pada
+			);
+			$this->arsipModel->upd($data_update_arsip, $arsip_id);
+			// Update arsip
+
+			echo json_encode(array("Tambah Berhasil", "tambah"));
+		}
 	}
 
 	function editSurat($id){
 		$id = base64_decode($id);
-		$where = "surat_id='$id'";
+		$where = "surat.surat_id='$id'";
 		$data['surat'] = $this->arsipModel->getSuratWhere($where)->result();
 		$this->load->view('arsip/ajax/surat/edit',$data);
 	}
 
 	function lihatSurat($id){
 		$id = base64_decode($id);
-		$where = "surat_id='$id'";
+		$where = "surat.surat_id='$id'";
 		$data['surat'] = $this->arsipModel->getSuratWhere($where)->result();
 		$data['parameter'] = "lihat";
 		$this->load->view('arsip/ajax/surat/edit',$data);
@@ -207,70 +235,86 @@ class ArsipCont extends CI_Controller {
 	function editSuratAksi(){
 		$id = $this->input->post("surat_id");
 		$arsip_id = $this->input->post("arsip_id");
+		$jenissurat = $this->input->post("jenissurathide");
 		$nomor = $this->input->post("nomor");
+		$tglditerima = $this->input->post("tglditerima");
 		$tglsurat = $this->input->post("tglsurat");
 		$perihal = $this->input->post("perihal");
-		$uraian = $this->input->post("uraian");
-		$jenissurat = $this->input->post("jenissurat");
-		$tujuandari = $this->input->post("tujuandari");
+		$pengirim = $this->input->post("pengirim");
+		$penerima = $this->input->post("penerima");
+		$disposisi = $this->input->post("disposisi");
 
 		$file_lama = $this->input->post("file_lama");
+		$nomor_lama = $this->input->post("nomor_lama");
 
 		$file_name = $_FILES["file"]['name'];
 
-		if(empty($file_name)){
-			if(empty($file_lama)){
-				$file = "";
-			}else{
-				$file_lama_ext = explode(".", $file_lama)[1];
-				$file = $this->charReplace($nomor).".".$file_lama_ext;
-				if(file_exists('./upload/'.$file_lama)){
-					rename("./upload/".$file_lama, "./upload/".$file);
-				}
+		if($jenissurat=="KELUAR"){
+			$whereCek = "nomor='$nomor' && jenissurat='KELUAR'";
+			$jmlCek = $this->arsipModel->getSuratWhere($whereCek)->num_rows();
+		}elseif ($jenissurat=="MASUK") {
+			$jmlCek = 0;
+		}
 
-			}
+		if($jmlCek>0 && $nomor!=$nomor_lama){
+			echo json_encode(array("Edit Gagal, Nomor surat duplikat", ""));
 		}else{
-			if(!empty($file_lama)){
-				if(file_exists('./upload/'.$file_lama)){
-					unlink("./upload/".$file_lama);
+
+			if(empty($file_name)){
+				if(empty($file_lama)){
+					$file = "";
+				}else{
+					$file_lama_ext = explode(".", $file_lama)[1];
+					$file = $this->charReplace($nomor).".".$file_lama_ext;
+					if(file_exists('./upload/'.$file_lama)){
+						rename("./upload/".$file_lama, "./upload/".$file);
+					}
+
 				}
+			}else{
+				if(!empty($file_lama)){
+					if(file_exists('./upload/'.$file_lama)){
+						unlink("./upload/".$file_lama);
+					}
+				}
+				$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
+				$nomorfix = $this->charReplace($nomor);
+				$file = $nomorfix.".".$file_ext;
 			}
-			$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
-			$nomorfix = $this->charReplace($nomor);
-			$file = $nomorfix.".".$file_ext;
+			// echo $file;
+
+			$oleh = $this->session->username;
+			$pada = date("Y-m-d H:i:s");
+
+			$data = array(
+				"nomor" => $nomor,
+				"tglditerima" =>  $jenissurat=="MASUK"? date("Y-m-d", strtotime($tglditerima)): "",
+				"tglsurat" => date("Y-m-d", strtotime($tglsurat)),
+				"perihal" => $perihal,
+				"pengirim" => $pengirim,
+				"penerima" => $penerima,
+				"disposisi" => $disposisi,
+				"file" => $file,
+
+				"updated_by" 	=> $oleh,
+				"updated_on" 	=> $pada
+			);
+			
+			$this->arsipModel->updSurat($data, $id);
+			if(!empty($file_name)){
+				$this->aksi_upload($file);
+			}
+
+			// Update arsip
+			$data_update_arsip = array(
+				"updated_by" 	=> $oleh,
+				"updated_on" 	=> $pada
+			);
+			$this->arsipModel->upd($data_update_arsip, $arsip_id);
+			// Update arsip
+
+			echo json_encode(array("Edit Berhasil", ""));
 		}
-		// echo $file;
-
-		$oleh = $this->session->username;
-		$pada = date("Y-m-d H:i:s");
-
-		$data = array(
-			"nomor" => $nomor,
-			"tglsurat" => date("Y-m-d", strtotime($tglsurat)),
-			"perihal" => $perihal,
-			"uraian" => $uraian,
-			"jenissurat" => $jenissurat,
-			"tujuandari" => $tujuandari,
-			"file" => $file,
-
-			"updated_by" 	=> $oleh,
-			"updated_on" 	=> $pada
-		);
-		
-		$this->arsipModel->updSurat($data, $id);
-		if(!empty($file_name)){
-			$this->aksi_upload($file);
-		}
-
-		// Update arsip
-		$data_update_arsip = array(
-			"updated_by" 	=> $oleh,
-			"updated_on" 	=> $pada
-		);
-		$this->arsipModel->upd($data_update_arsip, $arsip_id);
-		// Update arsip
-
-		echo json_encode(array("Edit Berhasil", ""));
 	}
 
 	function hapusSurat($id){

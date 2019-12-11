@@ -79,7 +79,11 @@
 			<td><?= $pengirim ?></td>
 			<td><?= $penerima ?></td>
 			<td>
+				<?php if(file_exists("./upload/".$file) && !empty($file)){ ?>
 				<a href="<?= base_url($fileBase64.'/downsurat') ?>" target="_blank" title="Download Surat"><?= $file ?></a>
+				<?php }else{ ?>
+				Tidak ada file
+				<?php } ?>
 			</td>
 		</tr>
 		<?php } ?>

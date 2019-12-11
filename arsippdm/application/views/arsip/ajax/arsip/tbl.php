@@ -36,6 +36,8 @@
 		?>
 		<tr id="<?= $id ?>" ondblclick="trpopup(this.id)">
 			<td>
+				<?= $nama_arsip ?>	
+
 				<!-- Start Tooltip Tools -->
 				<a id="trpopup<?= $id ?>" data-toggle="popover" data-placement="bottom" data-html="true" data-content="
 				<div style='text-align: right'>
@@ -53,9 +55,7 @@
 					</a>
 				</div>
 				"></a>
-				<!-- End Tooltip Tools -->
-			
-				<?= $nama_arsip ?>		
+				<!-- End Tooltip Tools -->	
 			</td>
 			<td><?= $keterangan ?></td>
 			<td><?= number_format($jml_surat) ?> Surat</td>
@@ -70,5 +70,5 @@
 </table>
 <script>
     // datatables("#idtable", "order-valueOrder", "target-orderable");
-    datatablesSearch("#example", "3-desc", "", );
+    datatablesSearch("#example", "4-desc", "", );
 </script>

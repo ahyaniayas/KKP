@@ -15,6 +15,12 @@ class ArsipModel extends CI_Model{
 		return $hasil;
 	}
 
+	function getWhere($where){
+		$this->db->where($where);
+		$hasil = $this->db->get("arsip");
+		return $hasil;
+	}
+
 	function ins($data){
 		$this->db->insert("arsip", $data);
 	}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Des 2019 pada 16.14
+-- Waktu pembuatan: 11 Des 2019 pada 02.59
 -- Versi server: 10.1.34-MariaDB
 -- Versi PHP: 7.2.7
 
@@ -39,13 +39,6 @@ CREATE TABLE `arsip` (
   `updated_on` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `arsip`
---
-
-INSERT INTO `arsip` (`arsip_id`, `nama_arsip`, `keterangan`, `progress`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
-(1, 'TES1', 'TES 1', 'AWAL', 'admin', '2019-12-10 21:28:39', 'admin', '2019-12-10 22:08:34');
-
 -- --------------------------------------------------------
 
 --
@@ -58,14 +51,6 @@ CREATE TABLE `no_agenda` (
   `surat_id` int(11) NOT NULL,
   `tahun` varchar(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `no_agenda`
---
-
-INSERT INTO `no_agenda` (`no_agenda_id`, `no_agenda`, `surat_id`, `tahun`) VALUES
-(1, '00001', 2, '2019'),
-(2, '00002', 3, '2019');
 
 -- --------------------------------------------------------
 
@@ -90,14 +75,6 @@ CREATE TABLE `surat` (
   `updated_by` varchar(25) DEFAULT NULL,
   `updated_on` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `surat`
---
-
-INSERT INTO `surat` (`surat_id`, `arsip_id`, `jenissurat`, `nomor`, `tglsurat`, `tglditerima`, `perihal`, `pengirim`, `penerima`, `disposisi`, `file`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
-(3, 1, 'MASUK', '01/XII/2019', '2019-12-01', '2019-12-03', 'TERIMA TGL 1 MASUK TGL 3', 'TANGGAL 1', 'TANGGAL 3', 'ini catatan disposisinya', '01-XII-2019.png', 'admin', '2019-12-10 21:58:42', NULL, NULL),
-(7, 1, 'KELUAR', '10/XII/2019.03', '2019-12-10', '1970-01-01', 'SURAT KE 3', 'PENGIRIM KE 3', 'PENERIMA KE 3', 'ini itu', '10-XII-2019-03.xlsx', 'admin', '2019-12-10 22:08:34', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -135,8 +112,7 @@ INSERT INTO `user` (`user_id`, `no_induk`, `nama`, `no_tlp`, `alamat`, `username
 -- Indeks untuk tabel `arsip`
 --
 ALTER TABLE `arsip`
-  ADD PRIMARY KEY (`arsip_id`),
-  ADD UNIQUE KEY `nama_arsip` (`nama_arsip`);
+  ADD PRIMARY KEY (`arsip_id`);
 
 --
 -- Indeks untuk tabel `no_agenda`
@@ -149,7 +125,6 @@ ALTER TABLE `no_agenda`
 --
 ALTER TABLE `surat`
   ADD PRIMARY KEY (`surat_id`),
-  ADD UNIQUE KEY `nomor` (`nomor`),
   ADD KEY `arsip_id` (`arsip_id`);
 
 --
@@ -168,19 +143,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `arsip`
 --
 ALTER TABLE `arsip`
-  MODIFY `arsip_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `arsip_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `no_agenda`
 --
 ALTER TABLE `no_agenda`
-  MODIFY `no_agenda_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `no_agenda_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `surat`
 --
 ALTER TABLE `surat`
-  MODIFY `surat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `surat_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
