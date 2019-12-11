@@ -114,7 +114,13 @@ $html = '
 			<td class="bA">
 				<table cellpadding="3">
 					<tr>
-						<td colspan="2" class="bB" style="text-align: center;font-size: 12pt;font-weight: bold;">
+						<td class="bB" style="text-align: center;" width="20%">
+							<center>
+								<img src="'.base_url('assets/images/label-kecil.gif').'" width="70"/>
+							</center>
+						</td>
+						<td class="bB" style="text-align: center;font-size: 12pt;font-weight: bold;vertical-align: middle;" width="80%">
+							<br>
 							E-ARSIP<br>
 							PIMPINAN DAERAH MUHAMMADIYAH<br>
 							BEKASI
