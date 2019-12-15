@@ -6,6 +6,10 @@ class PassCont extends CI_Controller {
 	function __construct(){
 		parent::__construct();		
 		$this->load->model('user/userModel');
+
+		if(empty($this->session->username)){
+			redirect(base_url("login"));
+		}
 	}
 
 	function gantiPass($id){
