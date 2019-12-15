@@ -38,7 +38,7 @@
 				</table>
 			</div>
 			<div class="item-wrapper" style="padding: 5px;">
-				<a href="<?= base_url($arsip_idBase64.'/laporansurat') ?>" target="_blank" class="btn btn-warning btn-xs float-right" style="margin: 5px 5px;" title="Cetak Laporan"><i class="mdi mdi-file"></i>Laporan</a>
+				<a href="<?= base_url($arsip_idBase64.'/laporansurat/'.$nama_arsip.'.pdf') ?>" target="_blank" class="btn btn-warning btn-xs float-right" style="margin: 5px 5px;" title="Cetak Laporan"><i class="mdi mdi-file"></i>Laporan</a>
 				<a href="#" class="btn btn-primary btn-xs float-right" style="margin: 5px 5px;" onclick="getForm('<?= base_url($segment2.'/tambah-surat') ?>')" title="Tambah Data"><i class="mdi mdi-playlist-plus"></i>Tambah Data</a>
 				<div class="table-responsive" id="tempatTbl">
 				</div>
