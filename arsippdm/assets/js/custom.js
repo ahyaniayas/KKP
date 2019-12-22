@@ -299,4 +299,8 @@ function jam(url, target){
     $(target).html(jamsekarang);
   }, 1000);
 }
+
+$(document).ready(function(){
+  jam("<?= base_url('jam') ?>", "#jam");
+})
 // END jam

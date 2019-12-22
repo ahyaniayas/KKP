@@ -189,9 +189,3 @@
 <script src="<?= base_url('assets/vendors/material-datetimepicker/momentjs/moment.js') ?>"></script>
 <script src="<?= base_url('assets/vendors/material-datetimepicker/js/bootstrap-material-datetimepicker.js') ?>"></script>
 <!-- end Bootstrap Material Datetimepicker -->
-
-<!-- Custom -->
-<script>
-  jam("<?= base_url('jam') ?>", "#jam");
-</script>
-<!-- Custom -->
