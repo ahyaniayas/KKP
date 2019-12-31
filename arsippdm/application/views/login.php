@@ -19,16 +19,16 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/custom.css') ?>">
     <!-- Custom CSS -->
-    <link rel="shortcut icon" href="<?= base_url('assets/images/label-kecil.gif') ?>" />
+    <link rel="shortcut icon" href="<?= base_url('assets/images/label-kecil.gambar') ?>" />
   </head>
   <body>
-    <img class="bg-image" src="<?= base_url('assets/images/bg-muhammadiyah.jpeg') ?>"/>
+    <img class="bg-image" src="<?= base_url('assets/images/bg.gambar') ?>"/>
     <?php $this->load->view('_part/loading'); ?>
     <div class="authentication-theme auth-style_1">
       <div class="row">
         <div class="col-12 logo-section">
           <a href="<?= base_url() ?>" class="logo">
-            <img src="<?= base_url('assets/images/label.gif') ?>" alt="logo" />
+            <img src="<?= base_url('assets/images/label.gambar') ?>" alt="logo" />
           </a>
         </div>
       </div>

@@ -116,7 +116,7 @@ $html = '
 					<tr>
 						<td class="bB" style="text-align: center;" width="20%">
 							<center>
-								<img src="'.base_url('assets/images/label-kecil.gif').'" width="70"/>
+								<img src="'.base_url('assets/images/label-kecil.gambar').'" width="70"/>
 							</center>
 						</td>
 						<td class="bB" style="text-align: center;font-size: 12pt;font-weight: bold;vertical-align: middle;" width="80%">

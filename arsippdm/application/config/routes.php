@@ -126,3 +126,9 @@ $route['(:any)/laporansurat/(:any).pdf'] = 'report/reportCont/surat/$1';
 $route['(:any)/gantipassword'] = 'user/passCont/gantiPass/$1';
 $route['gantipassword-aksi'] = 'user/passCont/gantiPassAksi';
 // end password
+
+// tampilan
+$route['tampilan'] = 'tampilan/tampilanCont/tampilan';
+$route['tbl-tampilan'] = 'tampilan/tampilanCont/tbl';
+$route['tampilan-aksi'] = 'tampilan/tampilanCont/tampilanAksi';
+// end tampilan

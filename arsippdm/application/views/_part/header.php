@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/vendors/bootstrap/css/dataTables.bootstrap4.min.css') ?>">
     <!-- end bootstrap datatables -->
     <!-- icon title -->
-    <link rel="shortcut icon" href="<?= base_url('assets/images/label-kecil.gif') ?>" />
+    <link rel="shortcut icon" href="<?= base_url('assets/images/label-kecil.gambar') ?>" />
     <!-- end icon title -->
     <!-- gijgo -->
     <link rel="stylesheet" href="<?= base_url('assets/vendors/gijgo/dist/combined/css/gijgo.min.css') ?>"/>
@@ -52,8 +52,8 @@
     <nav class="t-header">
       <div class="t-header-brand-wrapper">
         <a href="<?= base_url() ?>">
-          <img class="logo" src="<?= base_url('assets/images/label-panjang.gif') ?>" alt="">
-          <img class="logo-mini" src="<?= base_url('assets/images/label-kecil.gif') ?>" alt="">
+          <img class="logo" src="<?= base_url('assets/images/label-panjang.gambar') ?>" alt="">
+          <img class="logo-mini" src="<?= base_url('assets/images/label-kecil.gambar') ?>" alt="">
         </a>
       </div>
       <div class="t-header-content-wrapper">
@@ -109,7 +109,7 @@
             $konfActive="";
             $konfAria="false";
             $konfUl="";
-            if($segment1=='user'){
+            if($segment1=='user' || $segment1=='tampilan'){
               $konfActive="active";
               $konfAria="true";
               $konfUl="show";
@@ -125,9 +125,9 @@
               <li>
                 <a class="<?= ($segment1=='user')? 'active': ''; ?>" href="<?= base_url('user') ?>">Pengguna</a>
               </li>
-              <!-- <li>
-                <a class="" href="">Tampilan</a>
-              </li> -->
+              <li>
+                <a class="<?= ($segment1=='tampilan')? 'active': ''; ?>" href="<?= base_url('tampilan') ?>">Tampilan</a>
+              </li>
             </ul>
           </li>
           <?php } ?>
