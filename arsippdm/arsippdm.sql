@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Des 2019 pada 13.00
+-- Waktu pembuatan: 23 Des 2019 pada 07.51
 -- Versi server: 10.1.34-MariaDB
 -- Versi PHP: 7.2.7
 
@@ -44,7 +44,7 @@ CREATE TABLE `arsip` (
 --
 
 INSERT INTO `arsip` (`arsip_id`, `nama_arsip`, `keterangan`, `progress`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
-(1, 'TES1', 'dfsdfa', 'DFA', 'admin', '2019-12-11 10:15:32', 'admin', '2019-12-11 18:34:46');
+(1, 'TES1', 'dfsdfa', 'DFA', 'admin', '2019-12-11 10:15:32', 'admin', '2019-12-15 21:05:40');
 
 -- --------------------------------------------------------
 
@@ -58,6 +58,18 @@ CREATE TABLE `no_agenda` (
   `surat_id` int(11) NOT NULL,
   `tahun` varchar(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `no_agenda`
+--
+
+INSERT INTO `no_agenda` (`no_agenda_id`, `no_agenda`, `surat_id`, `tahun`) VALUES
+(1, '00001', 2, '2019'),
+(2, '00002', 3, '2019'),
+(3, '00003', 4, '2019'),
+(4, '00004', 5, '2019'),
+(5, '00005', 6, '2019'),
+(6, '00006', 7, '2019');
 
 -- --------------------------------------------------------
 
@@ -88,7 +100,12 @@ CREATE TABLE `surat` (
 --
 
 INSERT INTO `surat` (`surat_id`, `arsip_id`, `jenissurat`, `nomor`, `tglsurat`, `tglditerima`, `perihal`, `pengirim`, `penerima`, `disposisi`, `file`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
-(1, 1, 'KELUAR', '123', '2019-12-11', '0000-00-00', 'FDASDF', 'FDWFASDF', 'ASDFSADF', 'sdfasd', '123.png', 'admin', '2019-12-11 18:29:05', 'admin', '2019-12-11 18:34:46');
+(1, 1, 'KELUAR', '12345', '2019-12-11', '0000-00-00', 'FDASDF', 'FDWFASDF', 'ASDFSADF', 'sdfasd', '12345.JPG', 'admin', '2019-12-11 18:29:05', 'admin', '2019-12-12 06:28:18'),
+(2, 1, 'MASUK', '0002', '2019-12-12', '2019-12-12', 'DSFDFSd', 'FSDFASDF', 'DSFASDF', 'asdfasdf', '0002-000012019.JPG', 'admin', '2019-12-12 06:05:35', 'admin', '2019-12-12 06:27:57'),
+(4, 1, 'MASUK', '0002', '2019-12-13', '2019-12-13', 'DFASEFSd', 'FSADFSDf', 'SDFSADF', 'sdfasdfasdfs', '0002-000032019.JPG', 'admin', '2019-12-12 06:22:20', 'admin', '2019-12-12 06:28:08'),
+(6, 1, 'MASUK', '0002', '2019-12-14', '2019-12-14', 'AGAGAGDSAGAGAGDSAGAGAGDSAGAGAGDSAGAGAGDS', 'GADSGADS', 'FDASGDSDG', 'sdgsdfgsdag', '0002-000052019.pptm', 'admin', '2019-12-12 06:30:22', 'admin', '2019-12-15 21:05:40'),
+(7, 1, 'MASUK', 'dsfasf', '2019-12-12', '2019-12-12', 'FASDFSD', 'FSDFSDAF', 'FSASFS', 'fadsfas', 'dsfasf-000062019.JPG', 'admin', '2019-12-12 06:30:59', 'admin', '2019-12-12 06:32:43'),
+(8, 1, 'KELUAR', '01/XII/201911', '2019-12-12', '0000-00-00', 'DSFDS', 'FDSF', 'FDSAFAS', 'sfasfdasdf', '01-XII-201911.JPG', 'admin', '2019-12-12 06:31:34', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -117,7 +134,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `no_induk`, `nama`, `no_tlp`, `alamat`, `username`, `password`, `password_text`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
 (1, '999999999', 'ADMIN PDM', '021', 'bekasi', 'admin', 'c56d0e9a7ccec67b4ea131655038d604', '123456', 'system', '2019-12-02 14:21:20', 'admin', '2019-12-11 17:54:49'),
-(4, '123456', 'AHYANI', NULL, NULL, 'ahyani', 'c56d0e9a7ccec67b4ea131655038d604', '123456', 'admin', '2019-12-11 17:55:35', 'ahyani', '2019-12-11 18:59:25');
+(4, '123456', 'AHYANI', NULL, NULL, 'ahyani', 'c56d0e9a7ccec67b4ea131655038d604', '123456', 'admin', '2019-12-11 17:55:35', 'admin', '2019-12-11 20:38:08');
 
 --
 -- Indexes for dumped tables
@@ -165,13 +182,13 @@ ALTER TABLE `arsip`
 -- AUTO_INCREMENT untuk tabel `no_agenda`
 --
 ALTER TABLE `no_agenda`
-  MODIFY `no_agenda_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `no_agenda_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `surat`
 --
 ALTER TABLE `surat`
-  MODIFY `surat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `surat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
