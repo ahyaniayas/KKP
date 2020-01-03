@@ -5,7 +5,6 @@ class ArsipCont extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
-		$this->load->helper(array('url','download'));
 		$this->load->model('arsip/arsipModel');
 
 		if(empty($this->session->username)){
