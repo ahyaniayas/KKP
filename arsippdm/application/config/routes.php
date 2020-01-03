@@ -72,32 +72,6 @@ $route['hapus-user-aksi'] = 'user/userCont/userHapusAksi';
 $route['(:any)/lihat-user'] = 'user/userCont/userLihat/$1';
 // end user
 
-// jadwal
-$route['jadwal'] = 'jadwal/jadwalCont/jadwal';
-$route['tbl-jadwal'] = 'jadwal/jadwalCont/jadwalTbl';
-$route['tambah-jadwal'] = 'jadwal/jadwalCont/jadwalTambah';
-$route['tambah-jadwal-aksi'] = 'jadwal/jadwalCont/jadwalTambahAksi';
-$route['(:any)/edit-jadwal'] = 'jadwal/jadwalCont/jadwalEdit/$1';
-$route['edit-jadwal-aksi'] = 'jadwal/jadwalCont/jadwalEditAksi';
-$route['(:any)/hapus-jadwal'] = 'jadwal/jadwalCont/jadwalHapus/$1';
-$route['hapus-jadwal-aksi'] = 'jadwal/jadwalCont/jadwalHapusAksi';
-$route['(:any)/lihat-jadwal'] = 'jadwal/jadwalCont/jadwalLihat/$1';
-// end jadwal
-
-// detail jadwal
-$route['(:any)/jadwal'] = 'jadwal/jadwalDetailCont/detail/$1';
-$route['(:any)/tbl-jadwal'] = 'jadwal/jadwalDetailCont/tbl/$1';
-$route['(:any)/tambah-jadwal'] = 'jadwal/jadwalDetailCont/tambah/$1';
-$route['tambah-jadwal-detail-aksi'] = 'jadwal/jadwalDetailCont/tambahAksi';
-$route['(:any)/edit-jadwal-detail'] = 'jadwal/jadwalDetailCont/edit/$1';
-$route['edit-jadwal-detail-aksi'] = 'jadwal/jadwalDetailCont/editAksi';
-$route['(:any)/hapus-jadwal-detail'] = 'jadwal/jadwalDetailCont/hapus/$1';
-$route['hapus-jadwal-detail-aksi'] = 'jadwal/jadwalDetailCont/hapusAksi';
-$route['(:any)/lihat-jadwal-detail'] = 'jadwal/jadwalDetailCont/lihat/$1';
-$route['(:any)/terkumpul-jadwal-detail'] = 'jadwal/jadwalDetailCont/iuranTerkumpul/$1';
-$route['cetak/(:any)-(:any)'] = 'report/reportCont/jadwal/$1';
-// end detail jadwal
-
 // arsip
 $route['arsip'] = 'arsip/arsipCont/arsip';
 $route['tbl-arsip'] = 'arsip/arsipCont/tbl';
@@ -108,7 +82,9 @@ $route['(:any)/lihat-arsip'] = 'arsip/arsipCont/lihat/$1';
 $route['edit-arsip-aksi'] = 'arsip/arsipCont/editAksi';
 $route['(:any)/hapus-arsip'] = 'arsip/arsipCont/hapus/$1';
 $route['hapus-arsip-aksi'] = 'arsip/arsipCont/hapusAksi';
+// end arsip
 
+// surat
 $route['arsip/(:any)'] = 'arsip/arsipCont/surat/$1';
 $route['(:any)/tbl-surat'] = 'arsip/arsipCont/tblSurat/$1';
 $route['(:any)/tambah-surat'] = 'arsip/arsipCont/tambahSurat/$1';
