@@ -1,1 +1,0 @@
-Rp <?= number_format($jadwalH[0]->terkumpul) ?>
