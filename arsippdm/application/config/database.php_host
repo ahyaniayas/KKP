@@ -74,10 +74,10 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=localhost; dbname=ahyw5698_arsippdm; charset=utf8;',
+	'dsn'	=> 'mysql:host=localhost; dbname=ahyn4676_arsippdm; charset=utf8;',
 	'hostname' => '',
-	'username' => 'ahyw5698_root',
-	'password' => 'Password1',
+	'username' => 'ahyn4676_root',
+	'password' => 'Password1@mysqlhost',
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
