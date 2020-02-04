@@ -9,7 +9,7 @@
 		// Page footer
 	    function Footer() {
 	        $this->writeHTML('
-	        	<h5 style="text-align:right;">By : <a href="">http://ahyaniayas.com</a></h5>
+	        	<h5 style="text-align:right;">By : <a href="">http://ahyaniayas.my.id</a></h5>
 	        	');
 	    }
 
