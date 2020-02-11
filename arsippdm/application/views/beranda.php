@@ -1,12 +1,13 @@
 <?php $this->load->view('_part/header'); ?>
 <?php
   // print_r($arsip);
+  $nama = $this->session->nama;
 ?>
 <div class="page-content-wrapper-inner">
   <div class="content-viewport">
     <div class="row">
       <div class="col-12 py-5">
-        <h4>Selamat Datang,</h4>
+        <h4>Selamat Datang, <?= $nama ?></h4>
       </div>
     </div>
     <div class="row">

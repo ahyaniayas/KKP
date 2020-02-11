@@ -26,16 +26,19 @@
     <?php $this->load->view('_part/loading'); ?>
     <div class="authentication-theme auth-style_1">
       <div class="row">
-        <div class="col-12 logo-section">
-          <a href="<?= base_url() ?>" class="logo">
-            <img src="<?= base_url('assets/images/label.gambar') ?>" alt="logo" />
-          </a>
-        </div>
-      </div>
-      <div class="row">
         <div class="col-lg-5 col-md-7 col-sm-9 col-11 mx-auto">
           <div class="grid">
             <div class="grid-body">
+              <h3><b>Selamat Datang di aplikasi E-Arsip PDM BEKASI</b></h3>
+              <h4>Silahkan Masuk,</h4>
+              <hr style="margin-top: 50px;" />
+              <div class="row">
+                <div class="col-12 logo-section">
+                  <a href="<?= base_url() ?>" class="logo">
+                    <img src="<?= base_url('assets/images/label.gambar') ?>" alt="logo" />
+                  </a>
+                </div>
+              </div>
             <!-- alert -->
             <div class="alert" id="alert">
               <button type="button" class="close" onclick="closeAlert()">&times;</button>
@@ -51,7 +54,7 @@
                     <div class="form-group input-rounded">
                       <input type="password" class="form-control text-center" name="password" placeholder="Masukkan Password" required="" />
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block"> Masuk </button>
+                    <button type="submit" class="btn btn-primary btn-block"><i class="mdi mdi-login"></i> Masuk </button>
                   </form>
                   <!-- <div class="signup-link">
                     <a href="#">Lupa Password?</a>
