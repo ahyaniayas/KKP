@@ -6,6 +6,7 @@ class PassCont extends CI_Controller {
 	function __construct(){
 		parent::__construct();		
 		$this->load->model('user/userModel');
+		$this->load->model('activity/activityModel');
 
 		if(empty($this->session->username)){
 			redirect(base_url("login"));
@@ -40,6 +41,16 @@ class PassCont extends CI_Controller {
 				"updated_on" 	=> $pada
 			);
 			$this->userModel->upd($data, $id);
+
+			// add to activity
+			$ketActivity = "Merubah Password";
+			$dataActivity = array(
+				"keterangan" 	=> $ketActivity,
+				"created_by" 	=> $oleh,
+				"created_on" 	=> $pada
+			);
+			$this->activityModel->ins($dataActivity);
+
 			echo json_encode(array("Ganti Password Berhasil", ""));
 		}
 	}

@@ -46,6 +46,26 @@
       <?php } ?>
 
     </div>
+    <hr>
+    <h4>Riwayat Aktifitas Aplikasi <?= date("Y") ?></h4>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-12 equel-grid">
+        <div class="grid" style="height: 400px; overflow: auto;">
+          <div class="grid-body text-gray">
+            <?php
+              foreach($activity as $isi_activity){ 
+                $oleh = $isi_activity->created_by;
+                $pada = $isi_activity->created_on;
+                $keterangan = $isi_activity->keterangan;
+            ?>
+            <div class="alert alert-warning">
+              <b><?= date("d-m-Y H:i:s", strtotime($pada)) ?></b> <?= $oleh ?> <b><?= $keterangan ?></b>
+            </div>
+            <?php } ?>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- modals -->

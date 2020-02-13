@@ -37,7 +37,7 @@
 				<label for="usernameE" class="">Username</label>
 			</div>
 			<div class="col-md-9 showcase_content_area">
-				<input type="text" class="form-control" name="username" id="usernameE" maxlength="15" value="<?= $username ?>" placeholder="Masukkan Username" disabled="">
+				<input type="text" class="form-control" name="username" id="usernameE" maxlength="15" value="<?= $username ?>" placeholder="Masukkan Username" readonly="">
 			</div>
 		</div>
 		<div class="form-group row showcase_row_area">

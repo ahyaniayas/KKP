@@ -6,6 +6,7 @@ class UserCont extends CI_Controller {
 	function __construct(){
 		parent::__construct();		
 		$this->load->model('user/userModel');
+		$this->load->model('activity/activityModel');
 
 		if(empty($this->session->username) || $this->session->no_induk!="999999999"){
 			redirect(base_url("login"));
@@ -57,6 +58,15 @@ class UserCont extends CI_Controller {
 			);
 			$this->userModel->ins($data);
 
+			// add to activity
+			$ketActivity = "Menambahkan User ".$username;
+			$dataActivity = array(
+				"keterangan" 	=> $ketActivity,
+				"created_by" 	=> $oleh,
+				"created_on" 	=> $pada
+			);
+			$this->activityModel->ins($dataActivity);
+
 			echo json_encode(array("Tambah Berhasil", "tambah"));
 		}
 	}
@@ -79,7 +89,7 @@ class UserCont extends CI_Controller {
 
 		$no_induk = $this->input->post("no_induk");
 		$nama = $this->input->post("nama");
-		// $username = $this->input->post("username");
+		$username = $this->input->post("username");
 		$password = $this->input->post("password");
 
 		$no_induk_lama = $this->input->post("no_induk_lama");
@@ -113,6 +123,16 @@ class UserCont extends CI_Controller {
 				$data["password_text"] = $password;
 			}
 			$this->userModel->upd($data, $id);
+
+			// add to activity
+			$ketActivity = "Merubah User ".$username;
+			$dataActivity = array(
+				"keterangan" 	=> $ketActivity,
+				"created_by" 	=> $oleh,
+				"created_on" 	=> $pada
+			);
+			$this->activityModel->ins($dataActivity);
+
 			echo json_encode(array("Edit Berhasil", ""));
 		}
 	}
@@ -126,11 +146,25 @@ class UserCont extends CI_Controller {
 	function userHapusAksi(){
 		$id = $this->input->post("user_id");
 		$no_induk = $this->input->post("no_induk");
+		$username = $this->input->post("username");
+		
+		$oleh = $this->session->username;
+		$pada = date("Y-m-d H:i:s");
 
 		if($no_induk=="999999999"){
 			echo json_encode(array("Hapus Gagal, admin tidak bisa dihapus", ""));
 		}else{
 			$this->userModel->del($id);
+
+			// add to activity
+			$ketActivity = "Menghapus User ".$username;
+			$dataActivity = array(
+				"keterangan" 	=> $ketActivity,
+				"created_by" 	=> $oleh,
+				"created_on" 	=> $pada
+			);
+			$this->activityModel->ins($dataActivity);
+
 			echo json_encode(array("Hapus Berhasil", ""));
 		}
 	}

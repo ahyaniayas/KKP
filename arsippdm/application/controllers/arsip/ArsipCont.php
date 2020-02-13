@@ -6,6 +6,7 @@ class ArsipCont extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('arsip/arsipModel');
+		$this->load->model('activity/activityModel');
 
 		if(empty($this->session->username)){
 			redirect(base_url("login"));
@@ -48,8 +49,16 @@ class ArsipCont extends CI_Controller {
 				"created_by" 	=> $oleh,
 				"created_on" 	=> $pada
 			);
-			
 			$this->arsipModel->ins($data);
+
+			// add to activity
+			$ketActivity = "Menambahkan Arsip ".$nama_arsip;
+			$dataActivity = array(
+				"keterangan" 	=> $ketActivity,
+				"created_by" 	=> $oleh,
+				"created_on" 	=> $pada
+			);
+			$this->activityModel->ins($dataActivity);
 
 			echo json_encode(array("Tambah Berhasil", "tambah"));
 		}
@@ -95,8 +104,17 @@ class ArsipCont extends CI_Controller {
 				"updated_by" 	=> $oleh,
 				"updated_on" 	=> $pada
 			);
-
 			$this->arsipModel->upd($data, $id);
+
+			// add to activity
+			$ketActivity = "Merubah Arsip ".$nama_arsip;
+			$dataActivity = array(
+				"keterangan" 	=> $ketActivity,
+				"created_by" 	=> $oleh,
+				"created_on" 	=> $pada
+			);
+			$this->activityModel->ins($dataActivity);
+
 			echo json_encode(array("Edit Berhasil", ""));
 		}
 	}
@@ -109,7 +127,22 @@ class ArsipCont extends CI_Controller {
 
 	function hapusAksi(){
 		$id = $this->input->post("arsip_id");
+		$nama_arsip = $this->input->post("nama_arsip");
+
+		$oleh = $this->session->username;
+		$pada = date("Y-m-d H:i:s");
+
 		$this->arsipModel->del($id);
+
+		// add to activity
+		$ketActivity = "Menghapus Arsip ".$nama_arsip;
+		$dataActivity = array(
+			"keterangan" 	=> $ketActivity,
+			"created_by" 	=> $oleh,
+			"created_on" 	=> $pada
+		);
+		$this->activityModel->ins($dataActivity);
+
 		echo json_encode(array("Hapus Berhasil", ""));
 	}
 
@@ -215,6 +248,15 @@ class ArsipCont extends CI_Controller {
 			);
 			$this->arsipModel->upd($data_update_arsip, $arsip_id);
 			// Update arsip
+
+			// add to activity
+			$ketActivity = "Menambahkan Surat ".(!empty($no_agenda)? $no_agenda." - ": "").$nomor;
+			$dataActivity = array(
+				"keterangan" 	=> $ketActivity,
+				"created_by" 	=> $oleh,
+				"created_on" 	=> $pada
+			);
+			$this->activityModel->ins($dataActivity);
 
 			echo json_encode(array("Tambah Berhasil", "tambah"));
 		}
@@ -326,6 +368,15 @@ class ArsipCont extends CI_Controller {
 			$this->arsipModel->upd($data_update_arsip, $arsip_id);
 			// Update arsip
 
+			// add to activity
+			$ketActivity = "Merubah Surat ".(!empty($no_agenda)? $no_agenda." - ": "").$nomor;
+			$dataActivity = array(
+				"keterangan" 	=> $ketActivity,
+				"created_by" 	=> $oleh,
+				"created_on" 	=> $pada
+			);
+			$this->activityModel->ins($dataActivity);
+
 			echo json_encode(array("Edit Berhasil", ""));
 		}
 	}
@@ -340,6 +391,12 @@ class ArsipCont extends CI_Controller {
 	function hapusSuratAksi(){
 		$id = $this->input->post("surat_id");
 		$file = $this->input->post("file");
+		$nomor = $this->input->post("nomor");
+		$no_agenda = $this->input->post("no_agenda");
+
+		$oleh = $this->session->username;
+		$pada = date("Y-m-d H:i:s");
+		
 		$this->arsipModel->delSurat($id);
 
 		if(!empty($file)){
@@ -347,6 +404,16 @@ class ArsipCont extends CI_Controller {
 				unlink("./upload/".$file);
 			}
 		}
+
+		// add to activity
+		$ketActivity = "Menghapus Surat ".(!empty($no_agenda)? $no_agenda." - ": "").$nomor;
+		$dataActivity = array(
+			"keterangan" 	=> $ketActivity,
+			"created_by" 	=> $oleh,
+			"created_on" 	=> $pada
+		);
+		$this->activityModel->ins($dataActivity);
+
 		echo json_encode(array("Hapus Berhasil", ""));
 	}
 

@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class TampilanCont extends CI_Controller {
 	
 	function __construct(){
-		parent::__construct();		
+		parent::__construct();
+		$this->load->model('activity/activityModel');	
 
 		if(empty($this->session->username) || $this->session->no_induk!="999999999"){
 			redirect(base_url("login"));
@@ -46,6 +47,21 @@ class TampilanCont extends CI_Controller {
 				$msg = $data["error"];
 			}
 		}
+
+		$oleh = $this->session->username;
+		$pada = date("Y-m-d H:i:s");
+
+		if($msg=="Berhasil disimpan"){
+			// add to activity
+			$ketActivity = "Merubah Tampilan";
+			$dataActivity = array(
+				"keterangan" 	=> $ketActivity,
+				"created_by" 	=> $oleh,
+				"created_on" 	=> $pada
+			);
+			$this->activityModel->ins($dataActivity);
+		}
+
 		echo json_encode(array($msg, ""));
 
 	}
